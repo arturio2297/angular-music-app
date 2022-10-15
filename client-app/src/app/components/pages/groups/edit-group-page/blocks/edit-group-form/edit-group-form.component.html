@@ -1,0 +1,50 @@
+<section class="page-section">
+  <div class="form-container">
+    <div class="image-section">
+      <div class="image-actions">
+        <app-button variant="dark" (onClick)="startCropImage()">
+          Change Image
+        </app-button>
+        <app-button *ngIf="controls.image.value" variant="dark" (onClick)="controls.image.setValue(null)">
+          Reset Image
+        </app-button>
+      </div>
+      <app-image
+        [_src]="imageUrl"
+        [_fallback]="'./assets/images/group-anonymous.png'"
+        alt="music group"
+      >
+      </app-image>
+    </div>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
+      <app-form-control
+        label="Group name"
+        name="name"
+        controlFormName="name"
+        [loading]="loading.checkName"
+        [formGroupObj]="form"
+        [formControlObj]="controls.name"
+        [warning]="warning$.value"
+      >
+      </app-form-control>
+      <app-form-control
+        controlType="textarea"
+        label="Additional Information"
+        name="additionalInfo"
+        controlFormName="additionalInfo"
+        [formGroupObj]="form"
+        [formControlObj]="controls.additionalInfo"
+        [warning]="warning$.value"
+      >
+      </app-form-control>
+      <div class="form-actions">
+        <app-button
+          type="submit"
+          [loading]="loading.updateGroup"
+        >
+          Edit
+        </app-button>
+      </div>
+    </form>
+  </div>
+</section>

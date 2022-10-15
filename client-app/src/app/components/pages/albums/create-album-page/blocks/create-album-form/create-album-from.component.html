@@ -1,0 +1,82 @@
+<section class="page-section">
+  <div class="form-container">
+    <div class="image-section">
+      <div class="image-actions">
+        <app-button variant="dark" (onClick)="startCropImage()">
+          Add Image
+        </app-button>
+      </div>
+      <div class="image-container">
+        <img [src]="imageUrl || './assets/images/album-anonymous.png'" alt="music group">
+      </div>
+    </div>
+    <app-alert
+      type="danger"
+      *ngIf="form.errors && form.errors['imageRequired'] && warning$.value"
+    >
+      Album image is required
+    </app-alert>
+    <form
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()"
+      class="form"
+    >
+      <app-search-control
+        label="Group name"
+        name="groupName"
+        controlFormName="groupName"
+        [formGroupObj]="form"
+        [formControlObj]="controls.groupName"
+        [loading]="loading.searchGroups"
+        (onSearch)="onGroupSearch($event.value)"
+        (onCleared)="onGroupSearchCleared()"
+        [showAction]="true"
+        placeholder="Search group..."
+      >
+        <app-dropdown-list
+          [items]="search.groups"
+          [showClose]="true"
+          (onClose)="clearSearchResult()"
+          (onItemClick)="onGroupItemClick($event)"
+        >
+        </app-dropdown-list>
+      </app-search-control>
+      <app-alert
+        *ngIf="!controls.group.value && controls.groupName.value && !search.groups.length && !loading.searchGroups"
+        type="warning"
+      >
+        <span>Music group with name "{{controls.groupName.value}}" not found </span>
+        <div>You can add this group <app-link urlKey="createGroup">here</app-link>.</div>
+      </app-alert>
+      <app-form-control
+        *ngIf="controls.group.value"
+        label="Album title"
+        name="name"
+        controlFormName="name"
+        [loading]="loading.checkName"
+        [formGroupObj]="form"
+        [formControlObj]="controls.name"
+        [warning]="warning$.value"
+      >
+      </app-form-control>
+      <app-form-control
+        label="Released At"
+        name="releasedAt"
+        controlFormName="releasedAt"
+        _type="date"
+        [formGroupObj]="form"
+        [formControlObj]="controls.releasedAt"
+        [warning]="warning$.value"
+      >
+      </app-form-control>
+      <div class="form-actions">
+        <app-button
+          type="submit"
+          [loading]="loading.addAlbum"
+        >
+          Add
+        </app-button>
+      </div>
+    </form>
+  </div>
+</section>

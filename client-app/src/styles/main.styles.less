@@ -1,0 +1,109 @@
+//breakdowns
+@sm-bd: 576px;
+@md-bd: 768px;
+@lg-bd: 992px;
+@xl-bd: 1200px;
+@xxl-bd: 1400px;
+
+.tr-opacity(@time) {
+  transition: opactiy @time ease-out;
+}
+
+:root {
+  //colors
+  --app-almost-black: lighten(black, 10%);
+  --app-red: lighten(red, 10%);
+  --app-red-dark: darken(red, 10%);
+  --app-dark: lighten(black, 15%);
+  --app-dark-light: lighten(black, 20%);
+  --app-dark-brighest: lighten(black, 25%);
+  --app-grey: darken(white, 50%);
+  --app-almost-white: darken(white, 20%);
+  --app-bg-danger: #f8d7da;
+  --app-bg-info: #cfe2ff;
+  --app-bg-warning: #fff3cd;
+  --app-bg-success: #d1e7dd;
+  --app-text-danger: #842029;
+  --app-text-info: #084298;
+  --app-text-warning: #664d03;
+  --app-text-success: #0f5132;
+  --app-blue: #007bff;
+  --app-blue-dark: darken(#007bff, 10%);
+  --app-blue-light: lighten(#007bff, 10%);
+  //sizes
+  --app-header-height: 4rem;
+  --app-page-header-height: 4rem;
+  --app-page-header-height-big: 10rem;
+  --app-track-item-height: 4rem;
+  --app-audio-player-height: 5rem;
+  //transitions
+  --app-tr-bs: box-shadow .2s ease-out;
+  --app-tr-border: border .2s ease-out;
+  --app-tr-color: color .2s ease-out;
+  --app-tr-bg: background .2s ease-out;
+  --app-tr-opacity: opacity .2s ease-out;
+  --app-tr-maring: margin .2s ease-out;
+  --app-tr-margin-left: margin-left .2s ease-out;
+  --app-tr-margin-right: margin-right. 2s ease-out;
+  --app-tr-top: top .2s ease-out;
+  --app-tr-transform: transform .2s ease-out;
+  --app-tr-visibility: visibility 0s;
+  --app-tr-left: left .2s ease-out;
+  --app-tr-height: height .2s ease-out;
+  --app-tr-width: width .2s ease-out;
+  --app-tr-margin-bottom: margin-bottom .2s ease-out;
+  --app-tr-bottom: bottom .2s ease-out;
+  --app-tr-padding: padding .2s ease-out;
+  //box-shadows
+  --app-bs-action: 0 0 3px 3px rgba(255, 255, 255, 0.25);
+  --app-bs-main: 0 0 4px 4px rgba(255, 255, 255, 0.1);
+  --app-bs-main-dark: 0 0 4px 4px rgba(0, 0, 0, 0.1);
+  //animations
+  --app-anim-appearance: appearance .2s forwards ease-out;
+  --app-anim-disappearance: disappearance .2s forwards ease-out;
+}
+
+body {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--app-almost-black);
+}
+
+* {
+  font-size: 14px;
+  font-family: Geneva, Arial, Helvetica, sans-serif;
+}
+
+@keyframes appearance {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes disappearance {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@media (max-width: @xl-bd) {
+}
+
+@media (max-width: @lg-bd) {
+  * {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: @md-bd) {
+  * {
+    font-size: 12px;
+  }
+}

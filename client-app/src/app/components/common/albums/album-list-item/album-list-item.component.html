@@ -1,0 +1,129 @@
+<div
+  class="playable-item"
+  [ngClass]="{ 'playing': playing }"
+>
+  <app-actions-dropdown
+    *ngIf="showActions && !params.disableActions"
+    class="actions-1"
+    [_items]="actions"
+    (onActionsClick)="onActionsClick($event)"
+  >
+  </app-actions-dropdown>
+  <div
+    *ngIf="!params.hideTitle"
+    class="item-title-container"
+  >
+    <app-link
+      variant="white"
+      class="item-title"
+      urlKey="albumDetails"
+      [params]="{ id: album.id }"
+    >
+      {{ album.name }}
+    </app-link>
+  </div>
+  <div class="item-image-container">
+    <app-image
+      class="item-image"
+      [_src]="imageUrls.album"
+      [_fallback]="'./assets/images/album-anonymous.png'"
+      alt="music album"
+    >
+    </app-image>
+    <div class="actions-2-container">
+      <div class="actions-2">
+        <app-save-action
+          *ngIf="!params.saveDisable"
+          [item]="album"
+          itemType="album"
+          class="action save-action"
+          [size]="{ width: '3rem', height: '3rem' }"
+          [innerSize]="{ width: '2.75rem', height: '2.75rem' }"
+        >
+        </app-save-action>
+        <div
+          *ngIf="!params.cantPlay"
+          class="controls"
+        >
+          <app-action-button
+            *ngIf="itemStatus === 'none'"
+            (onClick)="onPlayClick()"
+            [_size]="{ width: '3rem', height: '3rem' }"
+            class="action control-action start-play-action"
+            type="play"
+          >
+          </app-action-button>
+          <app-action-button
+            *ngIf="playing && itemStatus === 'play'"
+            (onClick)="onStopClick()"
+            [_size]="{ width: '3rem', height: '3rem' }"
+            class="action control-action play-action"
+            type="stop"
+          >
+          </app-action-button>
+          <app-action-button
+            *ngIf="playing && itemStatus === 'stop'"
+            (onClick)="onPlayClick()"
+            [_size]="{ width: '3rem', height: '3rem' }"
+            class="action control-action stop-action"
+            type="play">
+          </app-action-button>
+        </div>
+        <app-like-action
+          *ngIf="!params.likeDisable"
+          [item]="album"
+          [params]="{
+          showLikesCount: true
+          }"
+          itemType="album"
+          [size]="{ width: '3rem', height: '3rem' }"
+          [innerSize]="{ width: '1.75rem', height: '1.75rem' }"
+          class="action like-action"
+        >
+        </app-like-action>
+      </div>
+    </div>
+    <app-item-counters
+      class="counters-container"
+      [listeningCount]="album.listening"
+      [tracksCount]="album.tracksCount"
+    >
+    </app-item-counters>
+    <div
+      class="player-indicators-container"
+      *ngIf="playing"
+    >
+      <app-play-indicator
+        *ngIf="itemStatus === 'play'"
+        class="play-indicator"
+        bgColor="white"
+      >
+      </app-play-indicator>
+      <app-stop-indicator
+        *ngIf="itemStatus === 'stop'"
+        class="stop-indicator"
+        bgColor="white"
+      >
+      </app-stop-indicator>
+    </div>
+  </div>
+  <div
+    *ngIf="!params.hideGroup"
+    class="subitem-container">
+    <app-image
+      class="subitem-image"
+      [_src]="imageUrls.group"
+      [_fallback]="'./assets/images/group-anonymous.png'"
+      alt="music group"
+    >
+    </app-image>
+    <app-link
+      variant="white"
+      class="subitem-title"
+      urlKey="groupDetails"
+      [params]="{ id: album.groupId }"
+    >
+      {{ album.groupName }}
+    </app-link>
+  </div>
+</div>

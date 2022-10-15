@@ -1,0 +1,17 @@
+<app-carousel
+  *ngIf="!loading"
+  class="albums-carousel"
+  [totalItems]="albums.length"
+  [items]="albums"
+  itemsType="album"
+>
+</app-carousel>
+<app-carousel
+  *ngIf="!loading"
+  class="track-lists-carousel"
+  [totalItems]="trackLists.length"
+  [items]="trackLists"
+  itemsType="track-list"
+>
+</app-carousel>
+<app-loader *ngIf="loading"></app-loader>

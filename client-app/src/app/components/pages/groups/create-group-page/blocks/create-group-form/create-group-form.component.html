@@ -1,0 +1,50 @@
+<section class="page-section">
+  <div class="form-container">
+    <div class="image-section">
+      <div class="image-actions">
+        <app-button variant="dark" (onClick)="startCropImage()">
+          Add Image
+        </app-button>
+      </div>
+      <div class="image-container">
+        <img [src]="imageUrl || './assets/images/group-anonymous.png'" alt="music group">
+      </div>
+    </div>
+    <app-alert
+      type="danger"
+      *ngIf="form.errors && form.errors['imageRequired'] && warning$.value"
+    >
+      Group image is required
+    </app-alert>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
+      <app-form-control
+        label="Group name"
+        name="name"
+        controlFormName="name"
+        [loading]="loading.checkName"
+        [formGroupObj]="form"
+        [formControlObj]="controls.name"
+        [warning]="warning$.value"
+      >
+      </app-form-control>
+      <app-form-control
+        controlType="textarea"
+        label="Additional Information"
+        name="additionalInfo"
+        controlFormName="additionalInfo"
+        [formGroupObj]="form"
+        [formControlObj]="controls.additionalInfo"
+        [warning]="warning$.value"
+      >
+      </app-form-control>
+      <div class="form-actions">
+        <app-button
+          type="submit"
+          [loading]="loading.addGroup"
+        >
+          Add
+        </app-button>
+      </div>
+    </form>
+  </div>
+</section>

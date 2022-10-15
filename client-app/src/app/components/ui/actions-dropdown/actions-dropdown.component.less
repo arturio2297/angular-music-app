@@ -1,0 +1,40 @@
+.container, .actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.container {
+  position: relative;
+  border-radius: 0.25rem;
+  transition: var(--app-tr-bg);
+
+  button {
+    border: none;
+    background: none;
+    padding: 0;
+  }
+
+  .actions-list {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    bottom: 0;
+    transform: translateY(100%);
+    transition: var(--app-tr-bg);
+    gap: 0.25rem;
+    border-radius: 0.25rem;
+    padding: 0.25rem;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  button[data-action="toggle"]:focus + .actions-list,
+  .actions-list:hover {
+    display: flex;
+    z-index: 1144;
+  }
+}
+
+.container:hover {
+}

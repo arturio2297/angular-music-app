@@ -1,0 +1,12 @@
+<main class="page-container">
+  <section class="page-header-container">
+    <app-create-album-header></app-create-album-header>
+  </section>
+  <section class="page-content">
+    <app-create-album-form
+      (onFormSubmit)="createAlbum($event)"
+      class="page-content-inner"
+    >
+    </app-create-album-form>
+  </section>
+</main>

@@ -1,0 +1,135 @@
+<div
+  class="track-item-container"
+  [ngClass]="{ 'playing': playing }"
+>
+  <div class="inner">
+    <div class="album-image-container">
+      <app-image
+        class="album-image"
+        [_src]="imageUrl.album"
+        [_fallback]="'./assets/images/album-anonymous.png'"
+      >
+      </app-image>
+      <div
+        *ngIf="!params.cantPlay"
+        role="button"
+        class="controls"
+        (click)="onControlsClick()"
+        [ngSwitch]="itemStatus"
+      >
+        <app-play-indicator
+          *ngSwitchCase="'play'"
+          class="play-indicator"
+        >
+        </app-play-indicator>
+        <app-stop-indicator
+          *ngSwitchCase="'stop'"
+          class="stop-indicator"
+        >
+        </app-stop-indicator>
+        <app-action-button class="action" *ngSwitchCase="'none'" type="play"></app-action-button>
+        <app-action-button class="action" *ngSwitchCase="'stop'" type="play"></app-action-button>
+        <app-action-button class="action" *ngSwitchCase="'play'" type="stop"></app-action-button>
+      </div>
+    </div>
+    <div class="info">
+      <h3>{{ track.name }}</h3>
+      <div class="links">
+        <app-link
+          *ngIf="!params.hideGroupLink"
+          class="group-name"
+          variant="white"
+          urlKey="groupDetails"
+          [params]="{ id: track.groupId }"
+        >
+          {{ track.groupName }}
+        </app-link>
+        <app-link
+          *ngIf="!params.hideAlbumLink"
+          class="album-name"
+          variant="white"
+          urlKey="albumDetails"
+          [params]="{ id: track.albumId }"
+        >
+          {{ track.albumName }}
+        </app-link>
+      </div>
+      <app-range-control
+        *ngIf="!params.disableControls && playing"
+        class="duration-control"
+        (onChange)="onPlayerTimeChange($event)"
+        [cur]="playerTime.currentTime"
+        [max]="playerTime.duration"
+        hintType="time"
+      >
+      </app-range-control>
+    </div>
+    <app-range-control
+      *ngIf="!params.disableControls && playing"
+      class="volume-control"
+      (onChange)="onPlayerVolumeChange($event)"
+      [cur]="playerVolume"
+      [max]="1"
+    >
+    </app-range-control>
+  </div>
+  <div class="inner">
+    <div *ngIf="duration$.value" class="time">
+      <span *ngIf="playing">{{ playerTime.currentTime | prettyTime }}</span>
+      <span *ngIf="!playing">{{ duration$.value | prettyTime }}</span>
+    </div>
+    <div class="inner">
+      <app-save-action
+        *ngIf="!params.saveDisable"
+        itemType="track"
+        [item]="track"
+      >
+      </app-save-action>
+      <app-like-action
+        *ngIf="!params.likeDisable"
+        itemType="track"
+        [item]="track"
+      >
+      </app-like-action>
+      <div
+        *ngIf="!params.downloadDisable"
+        class="download-track"
+      >
+        <app-action-button
+          [ngClass]="{ 'hide-download': isDownload$.value }"
+          (onClick)="onDownloadClick()"
+          type="download"
+          [_size]="{ width: '1.25rem', height: '1.25rem' }"
+          hint
+        >
+          <app-hint>
+            Download
+          </app-hint>
+        </app-action-button>
+        <app-spinner
+          *ngIf="isDownload$.value"
+          class="download-loader"
+          size="s"
+        >
+        </app-spinner>
+      </div>
+      <app-actions-dropdown
+        *ngIf="!params.disableActions"
+        [_items]="actions"
+        (onActionsClick)="onActionClick($event)"
+      >
+      </app-actions-dropdown>
+    </div>
+    <div class="inner">
+      <ng-content></ng-content>
+    </div>
+    <audio
+      style="display: none"
+      preload="metadata"
+      (loadedmetadata)="onAudioMetadataLoaded($event)"
+    >
+      <source [src]="audioUrl">
+    </audio>
+    <a #anchorRef style="{ display: none }"></a>
+  </div>
+</div>

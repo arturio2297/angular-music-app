@@ -1,0 +1,48 @@
+.app-like-action {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  .likes-count {
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translateX(-50%) translateY(-50%);
+    font-weight: bold;
+    font-size: 0.85rem;
+    color: white;
+  }
+
+}
+
+.app-like-action:hover {
+
+  ::ng-deep app-action-button.like-action-button .app-action-button {
+    transform: scale(1.05);
+    color: white;
+  }
+
+}
+
+.app-like-action.liked {
+
+  ::ng-deep app-action-button.like-action-button .app-action-button {
+    color: var(--app-red-dark);
+  }
+
+  .likes-count {
+    display: block;
+  }
+
+}
+
+.app-like-action.liked:hover {
+
+  ::ng-deep app-action-button.like-action-button .app-action-button {
+    color: var(--app-red);
+  }
+
+}

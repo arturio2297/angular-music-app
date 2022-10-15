@@ -1,0 +1,18 @@
+<div class="app-radio-button-container">
+  <div
+    class="app-radio-button"
+    [ngClass]="{ 'checked': checked }"
+    role="radio"
+    (click)="onButtonClick()"
+  >
+    <div class="slider"></div>
+  </div>
+  <div
+    class="title"
+    [ngClass]="{ 'checked': checked }"
+    *ngIf="title"
+  >
+    {{ title | titlecase }}
+  </div>
+  <ng-content></ng-content>
+</div>

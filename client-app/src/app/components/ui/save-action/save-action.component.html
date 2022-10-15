@@ -1,0 +1,29 @@
+<div
+  class="app-save-action"
+  (click)="onSaveClick()"
+  [style]="size || { width: '1.5rem', height: '1.5rem' }"
+  hint
+>
+  <div class="actions-container">
+    <app-action-button
+      class="save-action-button save"
+      [ngClass]="{ 'saved': saveData.saved }"
+      type="plus"
+      [_size]="innerSize || { width: '1.5rem', height: '1.5rem' }"
+    >
+    </app-action-button>
+    <app-action-button
+      class="save-action-button remove"
+      [ngClass]="{ 'saved': saveData.saved }"
+      type="check"
+      [_size]="innerSize || { width: '1.5rem', height: '1.5rem' }"
+    >
+    </app-action-button>
+  </div>
+  <app-hint
+    *ngIf="!params.disableHint"
+    [position]="params.hintPosition"
+  >
+    {{ saveData.saved ? 'Remove' : 'Save' }}
+  </app-hint>
+</div>

@@ -1,0 +1,32 @@
+.drop-zone {
+  position: relative;
+  width: 10rem;
+  height: 10rem;
+  margin: 0 auto;
+  border-radius: 1rem;
+  border: var(--app-grey) solid 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.drop-zone .drop-zone-icon {
+  opacity: 0;
+  transition: var(--app-tr-opacity);
+}
+
+.drop-zone .drop-zone-message {
+  position: absolute;
+  text-align: center;
+  transition: var(--app-tr-opacity);
+  z-index: -1;
+}
+
+.drop-zone.file-over .drop-zone-icon {
+  opacity: 1;
+}
+
+.drop-zone.file-over .drop-zone-message {
+  opacity: 0;
+}

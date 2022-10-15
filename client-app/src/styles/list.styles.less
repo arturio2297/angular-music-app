@@ -1,0 +1,228 @@
+@import "./main.styles";
+
+@playable-item-image-width: 100%;
+@playable-item-image-height: auto;
+@playable-item-image-border-radius: 0.5rem;
+
+.list-wrapper {
+  flex: 0.9;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  max-height: 100%;
+  height: auto;
+  padding: 1rem;
+  box-sizing: border-box;
+
+  .list-item-wrapper {
+    margin: 0.5rem;
+    width: calc(100% / 7 - 1rem);
+
+    @media (max-width: @xl-bd) {
+      width: calc(100% / 6 - 1rem);
+    }
+
+    @media (max-width: @lg-bd) {
+      width: calc(100% / 5 - 1rem);
+    }
+
+    @media (max-width: @md-bd) {
+      width: calc(100% / 4 - 1rem);
+    }
+
+    @media (max-width: @sm-bd) {
+      width: calc(100% / 3 - 1rem);
+    }
+  }
+}
+
+.playable-item {
+  position: relative;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  width: 100%;
+  height: 1fr;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  transition: var(--app-tr-bg);
+  user-select: none;
+
+  .actions-1 {
+    position: absolute;
+    z-index: 1;
+    right: 0;
+    top: 0;
+  }
+
+  .item-title-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    .item-title a {
+      font-weight: bold;
+    }
+  }
+
+  .item-image-container {
+    position: relative;
+    width: @playable-item-image-width;
+    height: @playable-item-image-height;
+
+    .item-image {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: auto;
+
+      img {
+        width: @playable-item-image-width;
+        height: @playable-item-image-height;
+        border-radius: @playable-item-image-border-radius;
+      }
+    }
+
+    .player-indicators-container {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translateX(-50%) translateY(-50%);
+
+      .play-indicator, .stop-indicator {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .actions-2-container {
+      position: absolute;
+      left: 0;
+      top: 0;
+      gap: 1rem;
+      transition: var(--app-tr-opacity), var(--app-tr-bg);
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: @playable-item-image-border-radius;
+
+      .actions-2 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        position: absolute;
+        left: 50%;
+        top: 55%;
+        transform: translateX(-50%) translateY(-50%);
+        transition: var(--app-tr-opacity), var(--app-tr-top);
+        opacity: 0;
+      }
+    }
+
+    .counters-container {
+      position: absolute;
+      left: 50%;
+      bottom: 0.5rem;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--app-tr-opacity);
+      opacity: 0;
+    }
+  }
+
+  .subitem-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .subitem-title a {
+      font-weight: bold;
+    }
+
+    .subitem-image {
+      max-width: 20%;
+
+      img {
+        max-width: 100%;
+        border-radius: 0.25rem;
+      }
+    }
+  }
+}
+
+.playable-item:hover,
+.playable-item.playing {
+  background: var(--app-dark-brighest);
+
+  .actions-2-container {
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.5);
+  }
+}
+
+.playable-item:hover {
+  .player-indicators-container {
+    display: none;
+  }
+
+  .actions-2-container {
+    .actions-2 {
+      top: 50%;
+      opacity: 1;
+    }
+  }
+
+  .counters-container {
+    opacity: 1;
+  }
+}
+
+.track-list-wrapper {
+  padding: 0.5rem 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+
+  .track-item-wrapper {
+    margin: 0.25rem 0.5rem;
+  }
+
+  .more-loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+  }
+}
+
+.names-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  .names-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+
+    .name-item {
+      display: flex;
+      gap: 0.25rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      background: var(--app-almost-black);
+      color: white;
+    }
+  }
+}

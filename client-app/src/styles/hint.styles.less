@@ -1,0 +1,15 @@
+.hint {
+  position: relative;
+  z-index: 1;
+
+  .hint-content {
+    display: none;
+  }
+}
+
+.hint.hint-show {
+  .hint-content {
+    display: block;
+    animation: var(--app-anim-appearance);
+  }
+}

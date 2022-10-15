@@ -1,0 +1,65 @@
+@btn-height: 2.25rem;
+@btn-width: 4.5rem;
+@slider-size: 1.75rem;
+@slider-gap: calc((@btn-height - @slider-size) / 2);
+
+.app-radio-button-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  .app-radio-button {
+    position: relative;
+    cursor: pointer;
+    height: @btn-height;
+    background: var(--app-dark-light);
+    transition: var(--app-tr-bg);
+    width: @btn-width;
+    border-radius: 1.5rem;
+    border: var(--app-grey) solid 1px;
+    box-sizing: border-box;
+
+    .slider {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: @slider-gap;
+      width: @slider-size;
+      height: @slider-size;
+      background: white;
+      border-radius: 50%;
+      transition: var(--app-tr-left), var(--app-tr-bg);
+    }
+  }
+
+  .app-radio-button.checked {
+    background: white;
+
+    .slider {
+      left: calc(@btn-width - @slider-size - @slider-gap);
+      background: var(--app-almost-black);
+    }
+  }
+
+  .app-radio-button:hover {
+    .slider {
+      left: calc(@slider-gap * 2);
+    }
+  }
+
+  .app-radio-button.checked:hover {
+    .slider {
+      left: calc(@btn-width - @slider-size - @slider-gap * 2);
+    }
+  }
+
+  .title {
+    color: var(--app-grey);
+    transition: var(--app-tr-color);
+  }
+
+  .title.checked {
+    color: white;
+  }
+
+}

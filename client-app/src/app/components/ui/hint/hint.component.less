@@ -1,0 +1,78 @@
+.position(@top, @left, @trY, @trX, @trRotate: 0) {
+  top: @top;
+  left: @left;
+  transform: translateY(@trY) translateX(@trX) rotate(@trRotate);
+}
+
+@arrow-size: 0.5rem;
+
+.hint-content {
+  width: max-content;
+  text-align: center;
+  word-break: break-word;
+  color: white !important;
+  position: absolute;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  background: black;
+  user-select: none;
+  z-index: 1144;
+}
+
+.hint-content::after {
+  position: absolute;
+  content: '';
+  width: @arrow-size;
+  height: @arrow-size;
+  background: black;
+}
+
+.hint-content.top {
+  //top,left,trY,trX,trRotate
+  .position(-1rem, 50%, -100%, -50%);
+}
+
+.hint-content.top::after {
+  .position(100%, 50%, -50%, -50%, 45deg);
+}
+
+.hint-content.left {
+  .position(50%, -1rem, -50%, -100%);
+}
+
+.hint-content.left::after {
+  .position(50%, 100%, -50%, -50%, 45deg);
+}
+
+.hint-content.bottom {
+  //top,left,trY,trX,trRotate
+  .position(1rem, 50%, 100%, -50%);
+}
+
+.hint-content.bottom::after {
+  .position(0, 50%, -50%, -50%, 45deg);
+}
+
+.hint-content.right {
+  .position(50%, calc(100% + 1rem), -50%, 0);
+}
+
+.hint-content.right::after {
+  .position(50%, 0, -50%, -50%, 45deg);
+}
+
+.hint-content.top-left {
+  .position(-1rem, 100%, -100%, -100%);
+}
+
+.hint-content.top-left::after {
+  .position(100%, calc(100% - 1rem), -50%, -50%, 45deg);
+}
+
+.hint-content.top-right {
+  .position(-1rem, 0, -100%, 0);
+}
+
+.hint-content.top-right::after {
+  .position(100%, 1rem, -50%, -50%, 45deg);
+}

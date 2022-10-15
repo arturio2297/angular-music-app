@@ -1,0 +1,17 @@
+<main class="page-container">
+  <section *ngIf="group" class="page-header-container">
+    <app-edit-group-header></app-edit-group-header>
+  </section>
+  <section *ngIf="group" class="page-content form-wrapper">
+    <app-edit-group-form
+      (onFormSubmit)="updateGroup($event)"
+      class="page-content-inner"
+    >
+    </app-edit-group-form>
+  </section>
+  <app-loader
+    *ngIf="loading.fetchGroup"
+    text="Download group..."
+  >
+  </app-loader>
+</main>

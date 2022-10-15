@@ -1,0 +1,11 @@
+<main class="page-container">
+  <section class="page-header-container">
+    <app-create-track-list-header></app-create-track-list-header>
+  </section>
+  <section class="page-content">
+    <app-create-track-list-form
+      class="page-content-inner"
+      (onFormSubmit)="createTrackList($event)">
+    </app-create-track-list-form>
+  </section>
+</main>

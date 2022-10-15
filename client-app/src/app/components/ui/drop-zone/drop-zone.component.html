@@ -1,0 +1,7 @@
+<div class="drop-zone" dropZone (fileDropped)="onFileDropped($event)" (click)="onDropZoneClick()">
+  <i-bs class="drop-zone-icon" [name]="iconName" width="5rem" height="5rem"></i-bs>
+  <div class="drop-zone-message">Click on an area or drag an file into it</div>
+</div>
+<form style="display: none" #fileForm>
+  <input [accept]="acceptFormats.join(',')" name="fileInput" type="file" #fileInput (change)="onFileInputChange($event)">
+</form>

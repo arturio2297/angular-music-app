@@ -1,0 +1,15 @@
+<div class="page-header-content">
+  <app-action-button
+    type="back"
+    (onClick)="navigationService.toTrackLists()"
+    hint
+    >
+    <app-hint
+      position="right"
+    >
+      To track lists page
+    </app-hint>
+  </app-action-button>
+  <h2>Edit track list {{trackList.name}}</h2>
+  <div></div>
+</div>

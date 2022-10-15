@@ -1,0 +1,39 @@
+<section class="page-content-header-page-inner-wrapper">
+  <app-group-tracks-header></app-group-tracks-header>
+</section>
+<section
+  class="page-content-page-inner-content"
+  scroll
+  (onScrollDown)="onScrollDown()"
+>
+  <div
+    class="track-list-wrapper"
+    [ngClass]="{ 'hide': !tracks.length}"
+  >
+    <app-track-list-item
+      class="track-item-wrapper"
+      *ngFor="let x of tracks"
+      [track]="x"
+      [listId]="x.groupId"
+      [listType]="listType"
+    >
+    </app-track-list-item>
+    <div
+      *ngIf="loading.fetchTracks"
+      class="more-loader"
+    >
+      <app-spinner></app-spinner>
+    </div>
+  </div>
+  <app-not-found-message
+    *ngIf="!tracks.length && !loading.fetchTracks"
+    [query]="filter.search"
+    contentName="tracks"
+  >
+  </app-not-found-message>
+  <app-loader
+    *ngIf="!tracks.length && loading.fetchTracks"
+    text="Download tracks..."
+  >
+  </app-loader>
+</section>

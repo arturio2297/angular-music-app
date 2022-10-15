@@ -1,0 +1,34 @@
+<section class="page-content-header-page-inner-wrapper">
+  <app-group-albums-header></app-group-albums-header>
+</section>
+<section
+  class="page-content-page-inner-content"
+  scroll
+  (onScrollDown)="onScrollDown()"
+>
+  <div
+    class="list-wrapper"
+    [ngClass]="{ 'hide': !albums.length || loading.fetchAlbums }"
+  >
+    <app-album-list-item
+      class="list-item-wrapper"
+      *ngFor="let x of albums"
+      [album]="x"
+      [params]="{
+      hideGroup: true
+      }"
+    >
+    </app-album-list-item>
+  </div>
+  <app-not-found-message
+    *ngIf="!albums.length && !loading.fetchAlbums"
+    [query]="searchQuery"
+    contentName="albums"
+  >
+  </app-not-found-message>
+  <app-loader
+    *ngIf="loading.fetchAlbums"
+    text="Download albums..."
+  >
+  </app-loader>
+</section>

@@ -1,0 +1,65 @@
+.app-link {
+  position: relative;
+  text-decoration: none;
+  transition: var(--app-tr-color);
+}
+
+.app-link.underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 2px;
+  background: white;
+  width: 0;
+  transition: width .3s ease-in-out, var(--app-tr-bg);
+}
+
+.app-link:hover::after {
+  width: 100%;
+}
+
+.app-link.blue {
+  color: var(--app-blue);
+}
+
+.app-link.white {
+  color: white;
+}
+
+.app-link.blue:hover {
+  color: var(--app-blue-dark);
+}
+
+.app-link.white:hover {
+  color: var(--app-almost-white);
+}
+
+.app-link.white:hover::after {
+  background: var(--app-almost-white);
+}
+
+.app-link.dark {
+  color: var(--app-almost-black);
+}
+
+.app-link.dark:hover {
+  color: black;
+}
+
+.like-title(@font-size) {
+  font-weight: bold;
+  font-size: @font-size;
+}
+
+.app-link.like-h1 {
+  .like-title(1.5rem);
+}
+
+.app-link.like-h2 {
+  .like-title(1.25rem);
+}
+
+.app-link.like-h3 {
+  .like-title(1.1rem);
+}

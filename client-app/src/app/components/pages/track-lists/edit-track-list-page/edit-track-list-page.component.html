@@ -1,0 +1,12 @@
+<main *ngIf="trackList" class="page-container">
+  <section class="page-header-container">
+    <app-edit-track-list-header></app-edit-track-list-header>
+  </section>
+  <section class="page-content">
+    <app-edit-track-list-form
+      class="page-content-inner"
+      (onFormSubmit)="updateTrackList($event)"
+    >
+    </app-edit-track-list-form>
+  </section>
+</main>

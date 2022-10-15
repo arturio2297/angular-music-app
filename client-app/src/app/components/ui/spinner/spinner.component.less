@@ -1,0 +1,72 @@
+.size(@size) {
+  width: @size;
+  height: @size;
+  border-top: calc(@size * 0.25) solid rgba(255, 255, 255, 0.2);
+  border-right: calc(@size * 0.25) solid rgba(255, 255, 255, 0.2);
+  border-bottom: calc(@size * 0.25) solid rgba(255, 255, 255, 0.2);
+  border-left: calc(@size * 0.25) solid #ffffff;
+}
+
+.app-spinner.ss {
+  .size(0.825rem);
+}
+
+.app-spinner.s {
+  .size(1rem);
+}
+
+.app-spinner.m {
+  .size(1.25rem);
+}
+
+.app-spinner.l {
+  .size(1.5rem);
+}
+
+.app-spinner.x {
+  .size(1.75rem);
+}
+
+.app-spinner.xl {
+  .size(2rem);
+}
+
+.app-spinner.xxl {
+  .size(2.25rem);
+}
+
+
+.app-spinner,
+.app-spinner:after {
+  border-radius: 50%;
+  width: 10em;
+  height: 10em;
+}
+
+.app-spinner {
+  position: relative;
+  transform: translateZ(0);
+  animation: load 1.1s infinite linear;
+}
+
+@-webkit-keyframes load {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes load {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}

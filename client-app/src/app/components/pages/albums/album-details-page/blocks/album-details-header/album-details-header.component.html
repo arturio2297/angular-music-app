@@ -1,0 +1,69 @@
+<div class="page-header-content">
+  <div class="page-header-content-wrapper">
+    <app-action-button
+      type="back"
+      (onClick)="navigationService.toAlbums()"
+      hint
+    >
+      <app-hint>To albums page</app-hint>
+    </app-action-button>
+    <app-album-list-item
+      [album]="album"
+      [params]="{
+      hideGroup: true,
+      hideTitle: true,
+      disableActions: true
+      }"
+    >
+    </app-album-list-item>
+    <div class="page-header-content-inner">
+      <div class="album-info">
+        <h2 class="album-title">
+          {{ album.name }}
+          <span class="released-at">
+          {{ album.releasedAt | prettyDate }}
+        </span>
+        </h2>
+        <div class="album-genres">
+          <span>Genres:</span>
+          <span *ngFor="let x of album.genres | genres">
+            {{ x }}
+          </span>
+        </div>
+        <div class="group-name">
+          <span>Group:</span>
+          <app-link
+            class="group-link"
+            variant="white"
+            urlKey="groupDetails"
+            [params]="{ id: album.groupId }"
+          >
+            {{ album.groupName }}
+          </app-link>
+        </div>
+      </div>
+      <form [formGroup]="form" class="filter-form">
+        <app-search-control
+          [loading]="searching$.value"
+          (onSearch)="onSearchTracks($event.value)"
+          (onCleared)="onSearchTracksCleared()"
+          [formGroupObj]="form"
+          [formControlObj]="form.controls.search"
+          controlFormName="search"
+          placeholder="Search tracks..."
+          [showAction]="true"
+          [searchQueries]="searchQueries"
+          (onRemoveQuery)="onRemoveQuery($event)"
+        >
+        </app-search-control>
+      </form>
+    </div>
+  </div>
+  <app-actions-dropdown
+    (onActionsClick)="onActionsClick($event)"
+    class="album-actions"
+    *ngIf="showActions"
+    [_items]="actions"
+  >
+  </app-actions-dropdown>
+</div>

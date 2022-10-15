@@ -1,0 +1,32 @@
+<div
+  class="toasts-container"
+  [ngClass]="{ 'player-open': showPlayer }"
+>
+  <div
+    *ngFor="let x of toasts"
+    class="item-container"
+    (mouseenter)="stopToastTimer(x)"
+    (mouseleave)="startToastTimer(x)"
+  >
+    <div
+      [className]="'item-inner ' + x.type"
+      [ngClass]="{ 'closed' : x.closed }"
+    >
+      <div class="item-content">
+        {{ x.content }}
+      </div>
+      <div
+        class="item-close"
+        role="button"
+        (click)="x.close()"
+      >
+        <i-bs name="x" width="1.75rem" height="1.75rem"></i-bs>
+      </div>
+      <div
+        class="life-indicator"
+        [style]="{ width: x.lifePercent + '%' }"
+      >
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<app-modal *ngIf="state.start" (_onClose)="close()">
+  <div data-modal="header">
+    {{ cropImageService.state$.value.headerTitle }}
+  </div>
+  <div data-modal="body" class="crop-image-dialog-body">
+    <div class="cropper-container" *ngIf="imageFile$.value">
+      <image-cropper
+        #imageCropperComponent
+        class="image-cropper"
+        (imageCropped)="onImageCropped($event)"
+        [autoCrop]="false"
+        [imageFile]="imageFile$.value"
+      >
+      </image-cropper>
+    </div>
+    <app-drop-zone
+      class="drop-zone"
+      type="image"
+      *ngIf="!imageFile$.value"
+      (onFileChange)="imageFile$.next($event)"
+    >
+    </app-drop-zone>
+  </div>
+  <div data-modal="footer">
+    <app-button
+      *ngIf="imageFile$.value"
+      (onClick)="removeImage()">
+      Remove Image
+    </app-button>
+    <app-button
+      [disable]="!imageFile$.value"
+      (onClick)="crop()"
+      hint
+    >
+      Crop
+      <app-hint *ngIf="!imageFile$.value">
+        Upload image
+      </app-hint>
+    </app-button>
+  </div>
+</app-modal>

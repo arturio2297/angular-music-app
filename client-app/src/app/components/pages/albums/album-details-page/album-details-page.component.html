@@ -1,0 +1,51 @@
+<main class="page-container">
+  <section
+    *ngIf="album"
+    class="page-header-container page-header-container-big"
+  >
+    <app-album-details-header></app-album-details-header>
+  </section>
+  <section
+    *ngIf="album"
+    class="page-content page-content-small"
+  >
+    <div
+      class="track-list-wrapper"
+      [ngClass]="{ 'hide': !tracks.length }"
+    >
+      <app-track-list-item
+        class="track-item-wrapper"
+        *ngFor="let x of tracks"
+        [track]="x"
+        [listId]="album.id"
+        [listType]="listType"
+        [params]="{
+        hideAlbumLink: true
+        }"
+      >
+      </app-track-list-item>
+      <div
+        *ngIf="loading.tracks.fetchTracks"
+        class="more-loader"
+      >
+        <app-spinner size="m"></app-spinner>
+      </div>
+    </div>
+    <app-not-found-message
+      *ngIf="!tracks.length && !loading.tracks.fetchTracks"
+      [query]="tracksFilter.search"
+      contentName="tracks"
+    >
+    </app-not-found-message>
+    <app-loader
+      *ngIf="!tracks.length && loading.tracks.fetchTracks"
+      text="Download tracks..."
+    >
+    </app-loader>
+  </section>
+  <app-loader
+    *ngIf="loading.albums.fetchAlbum"
+    text="Download album..."
+  >
+  </app-loader>
+</main>

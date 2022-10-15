@@ -1,0 +1,35 @@
+<app-form-control
+  _type="text"
+  [name]="name"
+  [label]="label"
+  [placeholder]="placeholder"
+  [warning]="warning"
+  [formGroupObj]="formGroupObj"
+  [formControlObj]="formControlObj"
+  [controlFormName]="controlFormName"
+  [loading]="loading"
+  [_showClear]="true"
+  [readonly]="readonly"
+  (onKeyDown)="onControlKeyDown($event)"
+  (onCleared)="onControlCleared()"
+  (onChange)="onControlChange($event)"
+  (onFocus)="onControlFocus()"
+  (onClick)="onControlClick()"
+  [action]="showAction ? 'search' : undefined"
+  (onButtonClick)="onControlSearch()"
+>
+  <ng-content></ng-content>
+  <app-dropdown-list
+    *ngIf="searchQueries.length && showQueries$.value"
+    [values]="searchQueries"
+    [showClose]="true"
+    (onValueClick)="onSearchQueryClick($event)"
+    (onClose)="showQueries$.next(false)"
+    itemAction="delete"
+    (onValueActionClick)="onRemoveQuery.emit($event)"
+  >
+    <div class="queries-list-hint">
+      Recent requests
+    </div>
+  </app-dropdown-list>
+</app-form-control>

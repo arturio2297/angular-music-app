@@ -1,0 +1,29 @@
+<main class="page-container">
+  <section class="page-header-container">
+    <app-groups-header></app-groups-header>
+  </section>
+  <section class="page-content">
+    <div
+      class="list-wrapper"
+      [ngClass]="{ 'hide': !groups.length || loading.fetchGroups }"
+    >
+      <app-group-list-item
+        class="list-item-wrapper"
+        *ngFor="let x of groups"
+        [group]="x"
+      >
+      </app-group-list-item>
+    </div>
+    <app-not-found-message
+      *ngIf="!groups.length && !loading.fetchGroups"
+      [query]="searchQuery"
+      contentName="groups"
+    >
+    </app-not-found-message>
+    <app-loader
+      *ngIf="loading.fetchGroups"
+      text="Download groups..."
+    >
+    </app-loader>
+  </section>
+</main>

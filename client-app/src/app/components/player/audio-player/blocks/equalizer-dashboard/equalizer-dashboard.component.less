@@ -1,0 +1,146 @@
+@import "../../../../../../styles/main.styles";
+
+@section-bottom-height: 16.5rem;
+@canvas-height: 12.5rem;
+@canvas-width: 35rem;
+
+.dashboard-container {
+  gap: 2rem;
+  background: var(--app-almost-black);
+  border-radius: 0.5rem;
+  transform-origin: bottom;
+  border: var(--app-grey) solid 1px;
+  box-sizing: border-box;
+  animation: dashboard-appearance .25s forwards ease-in-out;
+
+  .section-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: var(--app-dark-brighest) solid 1px;
+    box-sizing: border-box;
+    padding: 0.5rem 1rem;
+
+    .actions-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+  }
+
+  .section-bottom {
+    display: flex;
+    align-items: center;
+    height: @section-bottom-height;
+
+    .section-bottom-inner {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      box-sizing: border-box;
+    }
+
+    .section-bottom-inner.left {
+      border-right: var(--app-grey) solid 1px;
+      align-items: flex-end;
+      position: relative;
+
+      .color-form {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 2.5rem;
+        padding: 1rem;
+
+        ::ng-deep app-form-control {
+          .control,
+          .control-container {
+            border-radius: 50%;
+          }
+        }
+      }
+
+      canvas {
+        height: @canvas-height;
+        width: @canvas-width;
+      }
+    }
+
+    .section-bottom-inner.right {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+      padding: 0 1rem;
+
+      .gain-control-wrapper {
+
+        ::ng-deep app-range-control.range-control-container {
+          .control {
+            height: 10rem;
+
+            .indicator {
+              width: 5px;
+            }
+          }
+
+          .slider {
+            width: 1rem;
+            height: 1.25rem;
+            border: var(--app-grey) solid 1px;
+          }
+        }
+
+        .middle-indicator {
+          position: absolute;
+          display: flex;
+          align-content: center;
+          justify-content: space-between;
+          top: 50%;
+          left: 50%;
+          transform: translateY(-50%) translateX(-50%);
+          width: 1.5rem;
+
+          .middle-indicator-line {
+            width: 0.4rem;
+            height: 2px;
+            background: var(--app-grey)
+          }
+        }
+
+        .gain-indicator {
+          font-size: 0.9rem;
+          color: white;
+          width: 1.5rem;
+          text-align: center;
+        }
+
+        .gain-indicator.top {
+          margin-bottom: 1.5rem;
+        }
+
+        .gain-indicator.bottom {
+          margin-top: 1rem;
+        }
+      }
+    }
+
+    @media (max-width: @lg-bd) {
+      flex-direction: column-reverse;
+      height: calc(@section-bottom-height * 2);
+
+      .section-bottom-inner.left {
+        border-left: none;
+        border-top: var(--app-grey) solid 1px;
+      }
+    }
+  }
+
+}
+
+.dashboard-container.closed {
+  animation: dashboard-disappearance .3s ease-in-out;
+}

@@ -1,0 +1,44 @@
+<section class="page-content-header-page-inner-wrapper">
+  <app-me-tracks-header></app-me-tracks-header>
+</section>
+<section
+  class="page-content-page-inner-content"
+  scroll
+  (onScrollDown)="onScrollDown()"
+>
+  <div
+    [ngClass]="{ 'hide': !tracks.length }"
+    class="track-list-wrapper"
+  >
+    <app-track-list-item
+      *ngFor="let x of tracks"
+      class="track-item-wrapper"
+      [track]="x"
+      [listId]="x.trackListId || ''"
+      [listType]="listType"
+      [params]="{
+          disableActions: true,
+          saveDisable: true,
+          likeDisable: true
+          }"
+    >
+    </app-track-list-item>
+    <div
+      *ngIf="loading.fetchTracks"
+      class="more-loader"
+    >
+      <app-spinner></app-spinner>
+    </div>
+  </div>
+  <app-not-found-message
+    *ngIf="!tracks.length && !loading.fetchTracks"
+    [query]="filter.search"
+    contentName="tracks"
+  >
+  </app-not-found-message>
+  <app-loader
+    *ngIf="!tracks.length && loading.fetchTracks"
+    text="Download playlist..."
+  >
+  </app-loader>
+</section>

@@ -1,0 +1,19 @@
+<div class="page-header-page-inner-content">
+  <form
+    class="filter-form"
+    [formGroup]="form"
+  >
+    <app-search-control
+      [loading]="searching$.value"
+      [formGroupObj]="form"
+      [formControlObj]="form.controls.search"
+      [searchQueries]="searchQueries"
+      [showAction]="true"
+      controlFormName="search"
+      (onSearch)="onSearch($event)"
+      (onCleared)="onSearchCleared()"
+      (onRemoveQuery)="onRemoveSearchQuery($event)"
+    >
+    </app-search-control>
+  </form>
+</div>

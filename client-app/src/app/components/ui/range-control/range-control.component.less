@@ -1,0 +1,71 @@
+@control-size: 20px;
+@indicator-size: 2px;
+
+.control {
+  position: relative;
+  box-sizing: border-box;
+  cursor: pointer;
+  user-select: none;
+
+  .indicator {
+    position: absolute;
+    background: white;
+  }
+
+  .indicator.bg {
+    background: rgba(255, 255, 255, 0.25);
+  }
+
+  .slider {
+    position: absolute;
+    width: 0;
+    height: 0;
+    background: white;
+    border-radius: 50%;
+    transition: var(--app-tr-width), var(--app-tr-height);
+  }
+}
+
+.control:hover .slider, .control .slider.active {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+.control.horizontal {
+  height: @control-size;
+
+  .indicator {
+    top: 50%;
+    transform: translateY(-50%);
+    height: @indicator-size;
+  }
+
+  .indicator.bg {
+    width: 100%;
+  }
+
+  .slider {
+    top: 50%;
+    transform: translateY(-50%) translateX(-50%);
+  }
+}
+
+.control.vertical {
+  width: @control-size;
+
+  .indicator {
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: @indicator-size;
+  }
+
+  .indicator.bg {
+    height: 100%;
+  }
+
+  .slider {
+    left: 50%;
+    transform: translateY(50%) translateX(-50%);
+  }
+}

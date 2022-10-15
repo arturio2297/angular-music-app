@@ -1,0 +1,96 @@
+<app-modal (_onClose)="onClose()">
+  <div data-modal="header">
+    Add track to album {{ dialogData.albumName }}
+  </div>
+  <div data-modal="body" class="dialog-body">
+    <app-button
+      *ngIf="controls.audio.value"
+      (onClick)="controls.audio.setValue(null)"
+    >
+      Change Audio File
+    </app-button>
+    <app-drop-zone
+      *ngIf="!controls.audio.value"
+      type="audio"
+      (onFileChange)="onAudioChange($event)"
+    >
+    </app-drop-zone>
+    <app-alert
+      *ngIf="form.errors && form.errors['audioRequired'] && warning$.value"
+      type="danger"
+    >
+      Audio file is required
+    </app-alert>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
+      <app-form-control
+        label="Track title"
+        name="name"
+        controlFormName="name"
+        [loading]="loading.tracks.checkName"
+        [warning]="warning$.value"
+        [formGroupObj]="form"
+        [formControlObj]="controls.name"
+      >
+      </app-form-control>
+      <app-form-control
+        *ngIf="controls.genre.value"
+        label="Genre"
+        name="genre"
+        controlFormName="genre"
+        [warning]="warning$.value"
+        [formGroupObj]="form"
+        [formControlObj]="controls.genre"
+        [readonly]="true"
+        [_showClear]="true"
+        (onCleared)="onGenreCleared()"
+      >
+      </app-form-control>
+      <app-search-control
+        *ngIf="!controls.genre.value"
+        label="Genre"
+        name="genreSearch"
+        controlFormName="genreSearch"
+        [warning]="warning$.value"
+        [loading]="loading.genres.fetchGenres"
+        [formGroupObj]="form"
+        [formControlObj]="controls.genreSearch"
+        (onSearch)="onGenresSearch($event.value)"
+        (onCleared)="clearSearchResult()"
+        placeholder="Search genre..."
+        [showAction]="true"
+        [params]="{ length: 1, delay: 500 }"
+      >
+        <app-dropdown-list
+          [items]="genres"
+          (onItemClick)="onGenreItemClick($event.name)"
+          [showClose]="true"
+          (onClose)="clearSearchResult()"
+        >
+        </app-dropdown-list>
+      </app-search-control>
+      <app-alert
+        *ngIf="genresNotFound$.value && !loading.genres.fetchGenres && controls.genreSearch.value"
+        type="info"
+      >
+        <span>Genre "{{ controls.genreSearch.value }}" not found.</span>
+        <span>
+          Click
+          <app-text-button
+            text="here"
+            (onClick)="onGenreItemClick(controls.genreSearch.value || '')"
+          >
+          </app-text-button>
+          to select this genre.
+        </span>
+      </app-alert>
+    </form>
+  </div>
+  <div data-modal="footer">
+    <app-button
+      (onClick)="onSubmit()"
+      [loading]="loading.tracks.addTrack"
+    >
+      Add
+    </app-button>
+  </div>
+</app-modal>

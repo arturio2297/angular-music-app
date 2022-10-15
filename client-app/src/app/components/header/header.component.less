@@ -1,0 +1,102 @@
+@import "../../../styles/main.styles";
+
+.header {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 0;
+  height: var(--app-header-height);
+  background: var(--app-dark);
+  outline: solid 1px var(--app-dark-brighest);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12.5%;
+  box-sizing: border-box;
+  z-index: 1;
+
+  .logo-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0 1rem;
+    border: none;
+    background: none;
+    transition: var(--app-tr-bg);
+    cursor: pointer;
+
+    .play-indicator-container,
+    .stop-indicator-container {
+      width: 3rem;
+      height: 3rem;
+    }
+
+    .title {
+      font-weight: bold;
+      color: white;
+      font-size: 1.5rem;
+    }
+  }
+
+  .logo-container:hover {
+    background: var(--app-dark-light);
+  }
+
+  .navigation-wrapper {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: @xl-bd) {
+  .header {
+    padding: 0 10%;
+  }
+
+  .header .navigation-wrapper {
+    display: none;
+    left: 0;
+    bottom: -1px;
+    transform: translateY(100%);
+    background: var(--app-dark);
+    width: 100%;
+    border-bottom: var(--app-dark-brighest) solid 1px;
+    padding: 0 10%;
+  }
+
+  .header .navigation-wrapper:hover {
+    display: block;
+  }
+
+  .header .logo-container:focus {
+    background: var(--app-dark-light);
+  }
+
+  .header .logo-container:focus ~ .navigation-wrapper {
+    display: block;
+  }
+}
+
+@media (max-width: @lg-bd) {
+  .header, .header .navigation-wrapper {
+    padding: 0 5%;
+  }
+}
+
+:host ::ng-deep app-play-indicator.play-indicator-container {
+  .play-indicator .level {
+    width: calc(100% * 0.1);
+    height: calc(100% * 0.6);
+    transition: background .5s ease-in-out;
+  }
+}
+
+:host ::ng-deep app-stop-indicator.stop-indicator-container {
+  .stop-indicator .level {
+    width: calc(100% * 0.1);
+    height: calc(100% * 0.15);
+  }
+}

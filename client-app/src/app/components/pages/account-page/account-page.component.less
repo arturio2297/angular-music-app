@@ -1,0 +1,53 @@
+.forms-section {
+  padding: 0 !important;
+
+  .form-selector {
+    position: relative;
+    display: flex;
+    align-items: center;
+    color: white;
+    box-sizing: border-box;
+    height: 5rem;
+    width: 100%;
+    border-bottom: var(--app-dark-brighest) solid 1px;
+
+    .selector-item {
+      flex: 1;
+      height: 100%;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--app-tr-bg);
+      border: var(--app-dark-brighest) solid 1px;
+    }
+
+    .selector-item:hover,
+    .selector-item.selected {
+      background: var(--app-dark-light);
+    }
+
+    .selected-indicator {
+      position: absolute;
+      height: 3px;
+      width: 33%;
+      transition: var(--app-tr-left);
+      background: white;
+      bottom: 0;
+    }
+
+    .selected-indicator.personal-data {
+      left: 0;
+    }
+
+    .selected-indicator.change-password {
+      left: 33.3%;
+    }
+
+    .selected-indicator.change-email {
+      left: 66.6%;
+    }
+  }
+
+}

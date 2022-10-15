@@ -1,0 +1,134 @@
+.account-section {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--app-header-height);
+  box-sizing: border-box;
+
+  .avatar-container {
+    color: var(--app-grey);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .account-button {
+    position: relative;
+    cursor: pointer;
+    background: var(--app-dark);
+    border: none;
+    transition: var(--app-tr-bg);
+    padding: 0 1rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    color: white;
+  }
+
+  .account-button:hover, .account-button:focus, .account-button.active {
+    background: var(--app-dark-light);
+  }
+
+  .account-actions {
+    position: absolute;
+    width: 300px;
+    right: 0;
+    background: var(--app-dark-light);
+    border-radius: 0.5rem;
+    border: solid 1px var(--app-dark-brighest);
+    box-sizing: border-box;
+    animation: account-actions-appearance .2s forwards ease-out;
+
+    .account-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.5rem;
+      margin: 0.5rem 0;
+      cursor: pointer;
+      transition: var(--app-tr-bg), var(--app-tr-color);
+
+      .personal-data {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        color: white;
+      }
+    }
+
+    .account-info:hover {
+      background: var(--app-dark-brighest);
+    }
+
+    .actions-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      .action-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.5rem;
+        margin: 0.5rem 0;
+        background: var(--app-dark-light);
+        color: var(--app-blue);
+        transition: var(--app-tr-bg), var(--app-tr-color);
+        cursor: pointer;
+
+        .icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .content {
+          display: flex;
+          align-items: center;
+        }
+      }
+
+      .action-item:hover {
+        background: var(--app-dark-brighest);
+        color: var(--app-blue-light);
+      }
+
+    }
+  }
+
+  .account-actions.closed {
+    animation: account-actions-disappearance .2s forwards ease-out;
+  }
+
+}
+
+@keyframes account-actions-appearance {
+  from {
+    opacity: 0;
+    top: calc(100% + 2rem)
+  }
+  to {
+    opacity: 1;
+    top: calc(100% + 0.5rem);
+  }
+}
+
+@keyframes account-actions-disappearance {
+  from {
+    opacity: 1;
+    top: calc(100% + 0.5rem);
+  }
+  to {
+    opacity: 0;
+    top: calc(100% + 2rem);
+  }
+}
+
+:host ::ng-deep app-image img {
+  max-width: 3rem;
+  max-height: 3rem;
+  border-radius: 50%;
+}

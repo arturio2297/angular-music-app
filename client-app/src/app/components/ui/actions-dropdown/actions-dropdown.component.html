@@ -1,0 +1,29 @@
+<div
+  *ngIf="items.length"
+  class="container"
+>
+  <button data-action="toggle">
+    <app-action-button
+      [_size]="{ width: '1.75rem', height: '1.75rem' }"
+      type="dropdown"
+    >
+    </app-action-button>
+  </button>
+  <div class="actions-list">
+    <app-action-button
+      *ngFor="let x of items"
+      class="action-item"
+      [_size]="x.size || { width: '1.75rem', height: '1.75rem' }"
+      (onClick)="onActionsClick.emit(x.name)"
+      [type]="x.name"
+      hint
+    >
+      <app-hint
+        *ngIf="x.hint as hint"
+        [position]="hint.position || 'left'"
+      >
+        {{ hint.content }}
+      </app-hint>
+    </app-action-button>
+  </div>
+</div>

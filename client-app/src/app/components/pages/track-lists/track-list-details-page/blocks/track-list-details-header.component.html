@@ -1,0 +1,54 @@
+<div class="page-header-content">
+  <div class="page-header-content-wrapper">
+    <app-action-button
+      type="back"
+      (onClick)="navigationService.toTrackLists()"
+      hint
+    >
+      <app-hint>
+        To track lists page
+      </app-hint>
+    </app-action-button>
+    <app-list-of-tracks-item
+      [trackList]="trackList"
+      [params]="{
+      disableActions: true,
+      hideTitle: true
+      }"
+    >
+    </app-list-of-tracks-item>
+    <div class="page-header-content-inner">
+      <div class="track-list-info">
+        <h2>{{ trackList.name }}</h2>
+        <div class="track-list-genres">
+          <span>Genres: </span>
+          <span *ngFor="let x of trackList.genres | genres">
+            {{ x }}
+          </span>
+        </div>
+      </div>
+      <form [formGroup]="form" class="filter-form">
+        <app-search-control
+          [loading]="searching$.value"
+          (onSearch)="onSearchTracks($event.value)"
+          (onCleared)="onSearchTracksCleared()"
+          [formGroupObj]="form"
+          [formControlObj]="form.controls.search"
+          controlFormName="search"
+          placeholder="Search tracks..."
+          [showAction]="true"
+          [searchQueries]="searchQueries"
+          (onRemoveQuery)="onRemoveQuery($event)"
+        >
+        </app-search-control>
+      </form>
+    </div>
+  </div>
+  <app-actions-dropdown
+    *ngIf="showActions"
+    class="track-list-actions"
+    (onActionsClick)="onActionsClick($event)"
+    [_items]="actions"
+  >
+  </app-actions-dropdown>
+</div>

@@ -1,0 +1,88 @@
+.group-header-content-inner {
+  position: relative;
+}
+
+.group-info {
+  .group-title {
+    margin: 0;
+  }
+
+  .group-genres {
+    margin-top: 0.25rem;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    color: white;
+    gap: 0.25rem;
+  }
+}
+
+@tracks-link-width: 9rem;
+@albums-link-width: 9rem;
+
+.navigation {
+  position: absolute;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: -1rem;
+
+  .navigation-item {
+    color: var(--app-grey);
+    transition: var(--app-tr-color);
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 1.25rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .navigation-item.tracks {
+    width: @tracks-link-width;
+  }
+
+  .navigation-item.albums {
+    width: @albums-link-width;
+  }
+
+  .navigation-item:hover {
+    color: var(--app-almost-white);
+  }
+
+  .navigation-item.active {
+    color: white;
+  }
+
+  .navigation-item.active-albums ~ .selected-indicator,
+  .navigation-item.active-albums ~ .hover-indicator,
+  .navigation-item.albums:hover ~ .hover-indicator {
+    left: 0;
+    width: @albums-link-width;
+  }
+
+  .navigation-item.active-tracks ~ .selected-indicator,
+  .navigation-item.active-tracks ~ .hover-indicator,
+  .navigation-item.tracks:hover ~ .hover-indicator {
+    left: @albums-link-width;
+    width: @tracks-link-width;
+  }
+
+  .selected-indicator,
+  .hover-indicator {
+    position: absolute;
+    bottom: 0;
+    height: 2px;
+    transition: var(--app-tr-left), var(--app-tr-width);
+  }
+
+  .selected-indicator {
+    background: white;
+  }
+
+  .hover-indicator {
+    background: var(--app-grey);
+  }
+}

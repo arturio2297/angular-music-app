@@ -1,0 +1,31 @@
+<main class="page-container">
+  <section class="page-header-container">
+    <app-track-lists-header></app-track-lists-header>
+  </section>
+  <section class="page-content">
+    <div
+      class="list-wrapper"
+      [ngClass]="{ 'hide': !trackLists.length || loading.fetchTrackLists }"
+      scroll
+      (onScrollDown)="onScrollDown()"
+    >
+      <app-list-of-tracks-item
+        class="list-item-wrapper"
+        *ngFor="let x of trackLists"
+        [trackList]="x"
+      >
+      </app-list-of-tracks-item>
+    </div>
+    <app-not-found-message
+      *ngIf="!trackLists.length && !loading.fetchTrackLists"
+      [query]="searchQuery"
+      contentName="track lists"
+    >
+    </app-not-found-message>
+    <app-loader
+      *ngIf="loading.fetchTrackLists"
+      text="Download track lists..."
+    >
+    </app-loader>
+  </section>
+</main>

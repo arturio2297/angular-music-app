@@ -1,0 +1,92 @@
+<div
+  class="dashboard-container"
+  id="equalizer-dashboard"
+>
+  <section class="section section-top">
+    <app-radio-button
+      [checked]="equalizerOn"
+      checkedTitle="on"
+      uncheckedTitle="off"
+      (onChange)="onTurnEqualizerChange($event)"
+      hint
+    >
+      <app-hint position="left">
+        <div *ngIf="equalizerOn">
+          Turn off equalizer
+        </div>
+        <div *ngIf="!equalizerOn">
+          Turn on equalizer
+        </div>
+      </app-hint>
+    </app-radio-button>
+    <div class="actions-container">
+      <app-action-button
+        type="refresh"
+        [_size]="{ width: '1.75rem', height: '1.75rem' }"
+        (onClick)="onResetSettingsClick()"
+        hint
+      >
+        <app-hint>
+          Reset settings
+        </app-hint>
+      </app-action-button>
+      <app-action-button
+        type="close"
+        [_size]="{ width: '1.75rem', height: '1.75rem' }"
+        (onClick)="onClose.emit()"
+        hint
+      >
+        <app-hint position="top-left">
+          Close dashboard
+        </app-hint>
+      </app-action-button>
+    </div>
+  </section>
+  <section class="section section-bottom">
+    <div class="section-bottom-inner left">
+      <form
+        [formGroup]="form"
+        class="color-form"
+      >
+        <app-form-control
+          _type="color"
+          controlFormName="color"
+          [formGroupObj]="form"
+          [formControlObj]="form.controls.color"
+          (onChange)="onVisualiserColorChange($event)"
+        >
+        </app-form-control>
+      </form>
+      <canvas #canvasRef></canvas>
+    </div>
+    <div class="section-bottom-inner right">
+      <div
+        *ngFor="let x of currentSettings.gains"
+        class="gain-control-wrapper"
+      >
+        <div class="gain-indicator top">
+          {{ x.value.toFixed(1) }}
+        </div>
+        <app-range-control
+          class="range-control-container"
+          [max]="32"
+          [cur]="x.value + 16"
+          [valueTuning]="-16"
+          [step]="1"
+          containerId="equalizer-dashboard"
+          hintType="absolute"
+          orientation="vertical"
+          (onChange)="onGainChange($event, x.frequency)"
+        >
+          <div class="middle-indicator">
+            <div class="middle-indicator-line first"></div>
+            <div class="middle-indicator-line second"></div>
+          </div>
+        </app-range-control>
+        <div class="gain-indicator bottom">
+          {{ x.frequency | frequency }}
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

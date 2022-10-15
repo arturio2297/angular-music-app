@@ -1,0 +1,23 @@
+<main class="page-container">
+  <section
+    *ngIf="album"
+    class="page-header-container"
+  >
+    <app-edit-album-header></app-edit-album-header>
+  </section>
+  <section
+    *ngIf="album"
+    class="page-content"
+  >
+    <app-edit-album-form
+      (onFormSubmit)="updateAlbum($event)"
+      class="page-content-inner"
+    >
+    </app-edit-album-form>
+  </section>
+  <app-loader
+    *ngIf="loading.fetchAlbum"
+    text="Download album..."
+  >
+  </app-loader>
+</main>

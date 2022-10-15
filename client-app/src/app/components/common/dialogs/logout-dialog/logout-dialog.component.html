@@ -1,0 +1,13 @@
+<app-modal (_onClose)="onClose()">
+  <div data-modal="header">
+    Logout
+  </div>
+  <div data-modal="body">
+    Are you sure you want to logout?
+  </div>
+  <div data-modal="footer">
+    <app-button (onClick)="onLogout()">
+      Logout
+    </app-button>
+  </div>
+</app-modal>

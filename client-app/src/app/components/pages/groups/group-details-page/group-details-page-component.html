@@ -1,0 +1,19 @@
+<div class="page-container">
+  <section
+    *ngIf="group"
+    class="page-header-container page-header-container-big"
+  >
+    <app-group-details-header></app-group-details-header>
+  </section>
+  <section
+    *ngIf="group"
+    class="page-content page-content-small"
+  >
+    <router-outlet></router-outlet>
+  </section>
+  <app-loader
+    *ngIf="loading.fetchGroups"
+    text="Download group..."
+  >
+  </app-loader>
+</div>

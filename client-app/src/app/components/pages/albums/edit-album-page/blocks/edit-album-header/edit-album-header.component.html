@@ -1,0 +1,13 @@
+<div class="page-header-content">
+  <app-action-button
+    type="back"
+    (onClick)="navigationService.toAlbums()"
+    hint
+  >
+    <app-hint position="right">
+      To albums page
+    </app-hint>
+  </app-action-button>
+  <h2> Edit Album: {{ album.name }} </h2>
+  <div></div>
+</div>

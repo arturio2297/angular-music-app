@@ -1,0 +1,149 @@
+@item-padding: 0.25rem;
+@album-image-size: calc(var(--app-track-item-height) - @item-padding * 2);
+@album-image-border-radius: 0.5rem;
+
+.track-item-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--app-track-item-height);
+  padding: @item-padding;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: var(--app-tr-bg);
+  border-radius: 0.5rem;
+
+  .inner {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .album-image-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .controls {
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: var(--app-tr-opacity);
+        opacity: 0;
+        background: rgba(0, 0, 0, 0.5);
+        width: @album-image-size;
+        height: @album-image-size;
+        border-radius: @album-image-border-radius;
+
+        .action {
+          display: none;
+        }
+
+        .play-indicator {
+          height: @album-image-size;
+          width: @album-image-size;
+        }
+
+        .stop-indicator {
+          height: @album-image-size;
+          width: @album-image-size;
+        }
+      }
+
+      .controls .controls-inner {
+        color: white;
+      }
+
+    }
+
+    .info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+
+      h3 {
+        margin: 0;
+        color: white;
+        font-size: 0.9rem;
+      }
+
+      .links {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+    }
+
+    .time {
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .download-track {
+      position: relative;
+
+      .hide-download {
+        visibility: hidden;
+      }
+
+      .download-loader {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%);
+      }
+    }
+  }
+}
+
+.track-item-container:hover {
+
+}
+
+.track-item-container:hover,
+.track-item-container.playing {
+  background: var(--app-dark-brighest);
+
+  .inner .album-image-container .controls {
+    opacity: 1;
+  }
+}
+
+.track-item-container:hover {
+  .inner .album-image-container .controls {
+    .play-indicator, .stop-indicator {
+      display: none;
+    }
+    .action {
+      display: block;
+    }
+  }
+}
+
+:host ::ng-deep app-image.album-image img {
+  max-height: @album-image-size;
+  border-radius: @album-image-border-radius;
+}
+
+:host ::ng-deep app-range-control.duration-control .control {
+  width: 25vw;
+  min-width: 10rem;
+  height: 10px;
+}
+
+:host ::ng-deep app-range-control.volume-control {
+  width: 10vw;
+  min-width: 5rem;
+}
+
+:host ::ng-deep app-link.group-name, :host ::ng-deep app-link.album-name {
+  a {
+    font-size: 0.9rem;
+  }
+}

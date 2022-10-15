@@ -1,0 +1,22 @@
+<header class="header">
+  <button class="logo-container">
+    <app-play-indicator
+      *ngIf="isPlaying"
+      [bgColor]="currentColor$.value"
+      class="play-indicator-container">
+    </app-play-indicator>
+    <app-stop-indicator
+      *ngIf="!isPlaying"
+      class="stop-indicator-container"
+    >
+    </app-stop-indicator>
+    <span class="title">MusicApp</span>
+  </button>
+  <app-navigation
+    *ngIf="showNavigation"
+    class="navigation-wrapper"
+  >
+  </app-navigation>
+  <app-account-actions>
+  </app-account-actions>
+</header>

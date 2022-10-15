@@ -1,0 +1,102 @@
+@import "../../../../../../styles/main.styles";
+
+@main-link-width: 5rem;
+@tracks-link-width: 7.5rem;
+@albums-link-width: 7.5rem;
+@track-lists-link-width: 8.5rem;
+
+.navigation {
+  position: absolute;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: 0;
+
+  .navigation-item {
+    color: var(--app-grey);
+    transition: var(--app-tr-color);
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 1.25rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .navigation-item.main {
+    width: @main-link-width;
+  }
+
+  .navigation-item.tracks {
+    width: @tracks-link-width;
+  }
+
+  .navigation-item.albums {
+    width: @albums-link-width;
+  }
+
+  .navigation-item.track-lists {
+    width: @track-lists-link-width;
+  }
+
+  .navigation-item:hover {
+    color: var(--app-almost-white);
+  }
+
+  .navigation-item.active {
+    color: white;
+  }
+
+  .navigation-item.active-main ~ .selected-indicator,
+  .navigation-item.active-main ~ .hover-indicator,
+  .navigation-item.main:hover ~ .hover-indicator {
+    left: 0;
+    width: @main-link-width;
+  }
+
+  .navigation-item.active-tracks ~ .selected-indicator,
+  .navigation-item.active-tracks ~ .hover-indicator,
+  .navigation-item.tracks:hover ~ .hover-indicator {
+    left: @main-link-width;
+    width: @tracks-link-width;
+  }
+
+  .navigation-item.active-albums ~ .selected-indicator,
+  .navigation-item.active-albums ~ .hover-indicator,
+  .navigation-item.albums:hover ~ .hover-indicator {
+    left: calc(@main-link-width + @tracks-link-width);
+    width: @albums-link-width;
+  }
+
+  .navigation-item.active-track-lists ~ .selected-indicator,
+  .navigation-item.active-track-lists ~ .hover-indicator,
+  .navigation-item.track-lists:hover ~ .hover-indicator {
+    left: calc(@main-link-width + @tracks-link-width + @albums-link-width);
+    width: @track-lists-link-width;
+  }
+
+  .selected-indicator,
+  .hover-indicator {
+    position: absolute;
+    bottom: 0;
+    height: 2px;
+    transition: var(--app-tr-left), var(--app-tr-width);
+  }
+
+  .selected-indicator {
+    background: white;
+  }
+
+  .hover-indicator {
+    background: var(--app-grey);
+  }
+}
+
+@media (max-width: @md-bd) {
+  .navigation {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

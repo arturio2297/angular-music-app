@@ -1,0 +1,63 @@
+<div class="form-container update-account-form-container">
+  <div class="image-section">
+    <div class="image-actions">
+      <app-button variant="dark" (click)="startCropAvatar()">Update Avatar</app-button>
+      <app-button variant="dark" *ngIf="form.controls.avatar.value" (click)="resetAvatar()">Reset Avatar</app-button>
+    </div>
+    <div class="image-container">
+      <app-image
+        *ngIf="!controls.avatar.value"
+        [_src]="avatarUrl"
+        [_fallback]="'./assets/images/avatar-anonymous.png'"
+      >
+      </app-image>
+      <app-image
+        *ngIf="controls.avatar.value"
+        [_src]="controls.avatar.value.base64"
+      >
+      </app-image>
+    </div>
+  </div>
+  <form
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    class="form"
+  >
+    <app-form-control
+      name="account-username"
+      [loading]="loading.checkUsername"
+      [warning]="warning$.value"
+      controlFormName="username"
+      [formGroupObj]="form"
+      label="username"
+      [formControlObj]="form.controls.username"
+    >
+    </app-form-control>
+    <app-form-control
+      name="account-firstname"
+      [warning]="warning$.value"
+      controlFormName="firstname"
+      [formGroupObj]="form"
+      label="firstname"
+      [formControlObj]="form.controls.firstname"
+    >
+    </app-form-control>
+    <app-form-control
+      name="account-lastname"
+      [warning]="warning$.value"
+      controlFormName="lastname"
+      [formGroupObj]="form"
+      label="lastname"
+      [formControlObj]="form.controls.lastname"
+    >
+    </app-form-control>
+    <div class="form-actions">
+      <app-button
+        type="submit"
+        [loading]="loading.updateAccount"
+      >
+        Save
+      </app-button>
+    </div>
+  </form>
+</div>

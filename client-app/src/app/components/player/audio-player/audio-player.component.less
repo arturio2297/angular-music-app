@@ -1,0 +1,195 @@
+@album-image-size: calc( var(--app-audio-player-height) - 2rem);
+
+.audio-player-wrapper {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  height: var(--app-audio-player-height);
+  width: 100%;
+  background: var(--app-almost-black);
+  animation: player-appearance .2s forwards ease-out;
+  border-top: var(--app-dark-brighest) solid 1px;
+  box-sizing: border-box;
+  padding: 0 12.5%;
+  user-select: none;
+
+  .audio-player-container {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .inner {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .inner.track {
+      .track-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: @album-image-size;
+
+        .track-info-content {
+          width: 25vw;
+          min-width: 150px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          .track-info {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+
+            .track-info-left-col {
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              gap: 0.25rem;
+            }
+
+            .track-info-right-col {
+              display: flex;
+              flex-direction: column;
+              justify-content: flex-end;
+
+              .duration {
+                color: white;
+                font-size: 0.9rem;
+              }
+            }
+          }
+        }
+      }
+
+      .volume-indicator-container {
+        width: 7.5vw;
+        min-width: 35px;
+      }
+    }
+
+    .actions {
+      ::ng-deep app-action-button .app-action-button {
+        color: var(--app-grey);
+      }
+
+      ::ng-deep app-action-button .app-action-button:hover,
+      ::ng-deep app-action-button.active .app-action-button {
+        color: white;
+      }
+    }
+
+    .track-buffer-indicator {
+      z-index: -1;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      width: 100%;
+      height: 2px;
+      background: var(--app-grey)
+    }
+  }
+}
+
+.equalizer-dashboard-wrapper {
+  position: absolute;
+  bottom: calc(var(--app-audio-player-height) + 1.25rem);
+  right: 1rem;
+  transform-origin: bottom;
+  animation: player-block-appearance .3s ease-in-out;
+}
+
+.audio-visualiser-wrapper {
+  position: absolute;
+  bottom: calc(var(--app-audio-player-height) + 1.25rem);
+  left: 1rem;
+  transform-origin: bottom;
+  animation: player-block-appearance .3s ease-in-out;
+}
+
+.equalizer-dashboard-wrapper.closed {
+  animation: player-block-disappearance .3s ease-in-out;
+}
+
+.audio-visualiser-wrapper.closed {
+  animation: player-block-disappearance .3s ease-in-out;
+}
+
+.audio-player-wrapper.closed {
+  animation: player-disappearance .2s forwards ease-out;
+}
+
+@keyframes player-appearance {
+  from {
+    transform: translateY(50%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes player-disappearance {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(50%);
+    opacity: 0;
+  }
+}
+
+@keyframes player-block-appearance {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes player-block-disappearance {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0);
+  }
+}
+
+:host ::ng-deep app-image.album-image img {
+  max-height: @album-image-size;
+  border-radius: 0.5rem;
+}
+
+:host ::ng-deep app-link.album-name a {
+  font-size: 0.9rem;
+}
+
+:host ::ng-deep app-link.group-name a {
+  font-size: 0.9rem;
+}
+
+:host ::ng-deep app-action-button.player-action.active div {
+  color: white;
+}
+
+@media (max-width: 1200px) {
+  .audio-player-wrapper {
+    padding: 0 10%;
+  }
+}
+
+@media (max-width: 998px) {
+  .audio-player-wrapper {
+    padding: 0 5%;
+  }
+}

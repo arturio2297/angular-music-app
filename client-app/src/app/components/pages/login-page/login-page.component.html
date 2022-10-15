@@ -1,0 +1,48 @@
+<main class="page-container">
+  <section class="page-header-container">
+    <div class="page-header-content">
+      <h2>Login</h2>
+    </div>
+  </section>
+  <div class="page-content">
+    <div class="page-content-inner">
+      <section class="page-section">
+
+      </section>
+      <section class="page-section page-section-content-center right">
+        <div class="form-container">
+          <form
+            [formGroup]="form"
+            (ngSubmit)="onSubmit()"
+            class="form"
+          >
+            <app-form-control
+              label="email"
+              name="account-email"
+              controlFormName="email"
+              [warning]="warning$.value"
+              [formControlObj]="form.controls.email"
+              [formGroupObj]="form"
+            >
+            </app-form-control>
+            <app-form-control
+              label="password"
+              name="account-password"
+              controlFormName="password"
+              [warning]="warning$.value"
+              [formControlObj]="form.controls.password"
+              [formGroupObj]="form"
+            >
+            </app-form-control>
+            <div class="form-actions">
+              <app-button type="submit">Login</app-button>
+              <app-link urlKey="registration" variant="white">
+                Don't have an account yet?
+              </app-link>
+            </div>
+          </form>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>

@@ -1,0 +1,191 @@
+<div
+  class="audio-player-wrapper"
+  [ngClass]="{ 'closed': closed$.value }"
+>
+  <div class="audio-player-container">
+
+    <div class="inner controls">
+      <div hint>
+
+        <app-action-button
+          *ngIf="statuses.play === 'play'"
+          type="stop"
+          (onClick)="onStopClick()"
+        >
+        </app-action-button>
+
+        <app-action-button
+          *ngIf="statuses.play === 'stop'"
+          type="play"
+          (onClick)="onPlayClick()"
+        >
+        </app-action-button>
+
+        <app-hint position="top-right">
+          <div [ngSwitch]="statuses.play">
+            <span *ngSwitchCase="'play'">
+              Stop track
+            </span>
+            <span *ngSwitchCase="'stop'">
+              Play Track
+            </span>
+          </div>
+        </app-hint>
+      </div>
+      <div
+        *ngIf="!isSingle"
+        class="inner"
+      >
+        <app-action-button
+          type="previous"
+          (onClick)="onPreviousClick()"
+          [_size]="{ width: '1.75rem', height: '1.75rem' }"
+          hint
+        >
+          <app-hint position="top-right">
+            <div>
+              <div>Previous track</div>
+              <div>{{ tracks.previous.name }}</div>
+              <div>{{ tracks.previous.albumName }}</div>
+            </div>
+          </app-hint>
+        </app-action-button>
+        <app-action-button
+          type="next"
+          (onClick)="onNextClick()"
+          [_size]="{ width: '1.75rem', height: '1.75rem' }"
+          hint
+        >
+          <app-hint position="top-right">
+            <div>
+              <div>Next track</div>
+              <div>{{ tracks.next.name }}</div>
+              <div>{{ tracks.next.albumName }}</div>
+            </div>
+          </app-hint>
+        </app-action-button>
+      </div>
+
+    </div>
+
+    <div class="inner track">
+      <app-image
+        class="album-image"
+        [_src]="imageUrl.album"
+        [_fallback]="'./assets/images/album-anonymous.png'"
+      >
+      </app-image>
+      <div class="track-content">
+        <div class="track-info-content">
+          <div class="track-info">
+            <div class="track-info-left-col">
+              <app-link
+                class="album-name"
+                variant="white"
+                urlKey="albumDetails"
+                [params]="{ id: list.current.albumId }"
+              >
+                {{ list.current.name | trunc:30 }}
+              </app-link>
+              <app-link
+                class="group-name"
+                variant="white"
+                urlKey="groupDetails"
+                [params]="{ id: list.current.groupId }"
+              >
+                {{ list.current.groupName }}
+              </app-link>
+            </div>
+            <div class="track-info-right-col">
+              <div class="duration">
+                {{ time.currentTime | prettyTime }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <app-range-control
+          (onChange)="onTimeChange($event)"
+          [max]="time.duration"
+          [cur]="time.currentTime"
+          [step]="1"
+          hintType="time"
+        >
+          <div
+            class="track-buffer-indicator"
+            [style]="{ left: trackBuffer.start, width: trackBuffer.width }"
+          ></div>
+        </app-range-control>
+
+      </div>
+
+      <app-range-control
+        class="volume-indicator-container"
+        (onChange)="onVolumeChange($event)"
+        [max]="1"
+        [cur]="volume"
+      >
+      </app-range-control>
+
+    </div>
+
+    <div class="inner actions">
+      <app-action-button
+        *ngIf="equalizerEnabled"
+        class="player-action"
+        [ngClass]="{ 'active': equalizerOn}"
+        type="sliders"
+        [_size]="{ width: '1.75rem', height: '1.75rem' }"
+        (onClick)="onEqualizerActionClick()"
+        hint
+      >
+        <app-hint>
+          <div *ngIf="equalizerOn">Equalizer on</div>
+          <div *ngIf="!equalizerOn">Equalizer off</div>
+        </app-hint>
+      </app-action-button>
+
+      <app-action-button
+        (onClick)="onRepeatClick()"
+        class="player-action repeat-action"
+        [ngClass]="{ 'active': statuses.repeat !== 'none' }"
+        [_size]="{ width: '1.75rem', height: '1.75rem' }"
+        [type]="statuses.repeat === 'track' ? 'repeat-1' : 'repeat'"
+        hint
+      >
+        <app-hint position="top-left">
+          <div [ngSwitch]="statuses.repeat">
+            <span *ngSwitchCase="'none'">
+              Repeat
+            </span>
+            <span *ngSwitchCase="'track-list'">
+              Repeat track
+            </span>
+            <span *ngSwitchCase="'track'">
+              No repeat
+            </span>
+          </div>
+        </app-hint>
+      </app-action-button>
+
+      <app-action-button
+        class="player-action"
+        type="close"
+        (onClick)="onClose()"
+        hint
+      >
+        <app-hint position="top-left">
+          Close player
+        </app-hint>
+      </app-action-button>
+
+    </div>
+    <app-equalizer-dashboard
+      *ngIf="equalizerEnabled && showEqualizer$.value"
+      class="equalizer-dashboard-wrapper"
+      [ngClass]="{ 'closed' : equalizerClosed$.value }"
+      (onClose)="closeEqualizer()"
+    >
+    </app-equalizer-dashboard>
+  </div>
+</div>

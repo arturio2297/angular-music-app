@@ -1,0 +1,233 @@
+<div
+  class="app-carousel"
+  [ngClass]="{
+  'with-navigation': totalPages > 1
+  }"
+>
+  <div class="navigation-indicator-wrapper">
+    <div
+      class="navigation-indicator"
+      [style]="{
+      width: 'calc(100% /' + totalPages + ')',
+      left: 'calc(100% /' + totalPages + ' * ' + this.page$.value + ')'
+       }"
+    >
+    </div>
+  </div>
+  <div
+    class="carousel-wrapper"
+    [ngClass]="{
+    'first-page': isFirstPage,
+    'last-page': isLastPage
+   }"
+  >
+    <div
+      *ngIf="!isFirstPage"
+      class="slider previous"
+      role="button"
+      (mouseenter)="onSliderMouseEnter()"
+      (mouseleave)="onSliderMouseLeave()"
+      (click)="toPreviousPage()"
+    >
+      <i-bs name="caret-left-fill" width="2.25rem" height="2.25rem"></i-bs>
+    </div>
+    <div
+      *ngIf="!isLastPage"
+      class="slider next"
+      role="button"
+      (mouseenter)="onSliderMouseEnter(true)"
+      (mouseleave)="onSliderMouseLeave()"
+      (click)="toNextPage()"
+    >
+      <i-bs name="caret-right-fill" width="2.25rem" height="2.25rem"></i-bs>
+    </div>
+    <div
+      class="carousel-inner"
+      [style]="{ transform: transform }"
+      mouseWheel
+      (onWheelUp)="toNextPage()"
+      (onWheelDown)="toPreviousPage()"
+    >
+      <div
+        class="carousel-item-wrapper"
+        [style]="{ width: itemWidth + '%' }"
+        *ngFor="let x of items"
+      >
+        <div
+          class="carousel-item-inner"
+          [ngClass]="{ 'playing': playing(x) }"
+        >
+          <div class="item-header">
+            <div class="item-image-container">
+              <app-image
+                [_src]="getImageUrl(x).item"
+                [_fallback]="'../assets/images/album-anonymous.png'"
+              >
+              </app-image>
+              <div class="item-actions-container">
+                <div class="item-actions">
+                  <app-save-action
+                    [item]="x"
+                    [itemType]="itemsType"
+                    [params]="{
+                  disableHint: true
+                  }"
+                    [size]="{ width: '3rem', height: '3rem' }"
+                    [innerSize]="{ width: '3rem', height: '3rem' }"
+                    class="action"
+                  >
+                  </app-save-action>
+                  <div class="controls">
+                    <app-action-button
+                      *ngIf="itemStatus(x) === 'none'"
+                      (onClick)="onPlayClick(x)"
+                      type="play"
+                      [_size]="{ width: '4rem', height: '4rem' }"
+                      class="action control-action start-play-action"
+                    >
+                    </app-action-button>
+                    <app-action-button
+                      *ngIf="itemStatus(x) === 'stop'"
+                      (onClick)="onPlayClick(x)"
+                      type="play"
+                      [_size]="{ width: '4rem', height: '4rem' }"
+                      class="action control-action play-action"
+                    >
+                    </app-action-button>
+                    <app-action-button
+                      *ngIf="itemStatus(x) === 'play'"
+                      (onClick)="onStopClick()"
+                      type="stop"
+                      [_size]="{ width: '4rem', height: '4rem' }"
+                      class="action control-action stop-action"
+                    >
+                    </app-action-button>
+                  </div>
+                  <app-like-action
+                    [item]="x"
+                    [itemType]="itemsType"
+                    [params]="{
+                  disableHint: true
+                  }"
+                    [size]="{ width: '3rem', height: '3rem' }"
+                    [innerSize]="{ width: '2rem', height: '2rem' }"
+                  >
+                  </app-like-action>
+                </div>
+              </div>
+              <app-item-counters
+                class="item-counters"
+                [tracksCount]="x.tracksCount"
+                [listeningCount]="x.listening"
+              >
+              </app-item-counters>
+              <div
+                *ngIf="playing(x)"
+                class="player-indicators-container"
+              >
+                <app-stop-indicator
+                  class="stop-indicator"
+                  *ngIf="itemStatus(x) === 'stop'"
+                >
+                </app-stop-indicator>
+                <app-play-indicator
+                  class="play-indicator"
+                  *ngIf="itemStatus(x) === 'play'"
+                >
+                </app-play-indicator>
+              </div>
+            </div>
+            <div
+              class="item-title-container"
+              [ngSwitch]="itemsType"
+            >
+              <app-link
+                class="item-title"
+                *ngSwitchCase="'album'"
+                [underline]="true"
+                like="h2"
+                variant="white"
+                urlKey="albumDetails"
+                [params]="{ id: x.id }"
+              >
+                {{ x.name }}
+              </app-link>
+              <app-link
+                class="item-title"
+                *ngSwitchCase="'track-list'"
+                [underline]="true"
+                like="h2"
+                variant="white"
+                urlKey="trackListDetails"
+                [params]="{ id: x.id }"
+              >
+                {{ x.name }}
+              </app-link>
+            </div>
+            <div
+              class="item-info-container"
+              [ngSwitch]="itemsType"
+            >
+              <app-link
+                *ngSwitchCase="'album'"
+                urlKey="groupDetails"
+                [params]="{ id: x.groupId || '' }"
+                variant="white"
+                like="h3"
+              >
+                {{ x.groupName }}
+              </app-link>
+              <app-link
+                *ngSwitchCase="'track-list'"
+                urlKey="trackLists"
+                [queryParams]="{ author: x.authorUsername || '' }"
+                variant="white"
+                like="h3"
+                >
+                {{ x.authorUsername }}
+              </app-link>
+            </div>
+          </div>
+          <div class="item-body">
+            <app-track-list-item
+              class="track-item"
+              *ngFor="let track of x.tracks"
+              [listType]="trackListType"
+              [listId]="x.id"
+              [track]="track"
+              [params]="{
+            disableActions: true,
+            likeDisable: true,
+            saveDisable: true,
+            downloadDisable: true,
+            disableControls: true,
+            hideAlbumLink: true
+            }"
+            >
+            </app-track-list-item>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    *ngIf="pages.length > 1"
+    class="navigation-wrapper"
+  >
+    <div
+      *ngFor="let x of pages"
+      class="navigation-item-wrapper"
+      role="button"
+      (click)="toPage(x)"
+    >
+      <div
+        class="navigation-item"
+        [ngClass]="{
+        'active': x === page$.value,
+        'close-active': x === page$.value - 1 || x === page$.value + 1
+         }"
+      >
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+<section *ngIf="account" class="account-section">
+  <button class="account-button" (focus)="openActions()" (blur)="closeActions()" [ngClass]="{ 'active' : isAccountPage }">
+    <i-bs name="caret-down-fill"></i-bs>
+    <div class="avatar-container">
+      <app-image
+        [_src]="avatarUrl"
+        [_fallback]="'./assets/images/avatar-anonymous.png'"
+        alt="account avatar"
+      >
+      </app-image>
+    </div>
+  </button>
+  <div
+    *ngIf="showActions$.value"
+    class="account-actions"
+    [ngClass]="{ 'closed' : actionsClosed$.value }"
+  >
+    <div class="account-info" (click)="navigateToAccount()">
+      <div class="avatar-container">
+        <app-image
+          [_src]="avatarUrl"
+          [_fallback]="'./assets/images/avatar-anonymous.png'"
+          alt="account avatar"
+        >
+        </app-image>
+      </div>
+      <div class="personal-data">
+        <app-info-field
+          data-title="{{ account.email }}"
+          name="Email"
+          [value]="account.email | trunc: 20"
+        ></app-info-field>
+        <app-info-field
+          data-title="{{ account.username }}"
+          name="Username"
+          [value]="account.username | trunc: 20"
+        ></app-info-field>
+      </div>
+    </div>
+    <div class="actions-list">
+      <div class="action-item" role="button" (click)="onLogoutClick()">
+        <div class="icon">
+          <i-bs name="door-open-fill"></i-bs>
+        </div>
+        <div class="content">
+          Logout
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

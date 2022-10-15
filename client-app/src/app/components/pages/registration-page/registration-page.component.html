@@ -1,0 +1,96 @@
+<main class="page-container">
+  <section class="page-header-container">
+    <div class="page-header-content">
+      <h2>Registration</h2>
+    </div>
+  </section>
+  <section class="page-content">
+    <div class="page-content-inner">
+      <section class="page-section">
+
+      </section>
+      <section class="page-section right page-section-content-center">
+        <div class="form-container">
+          <form
+            [formGroup]="form"
+            (ngSubmit)="onSubmit()"
+            class="form"
+          >
+            <app-form-control
+              label="email"
+              name="account-email"
+              controlFormName="email"
+              [warning]="warning$.value"
+              [formControlObj]="form.controls.email"
+              [formGroupObj]="form"
+              [loading]="loading.checkEmail"
+            >
+            </app-form-control>
+            <app-form-control
+              label="username"
+              name="account-username"
+              controlFormName="username"
+              [warning]="warning$.value"
+              [formControlObj]="form.controls.username"
+              [formGroupObj]="form"
+              [loading]="loading.checkUsername"
+            >
+            </app-form-control>
+            <app-form-control
+              label="firstname"
+              name="account-firstname"
+              controlFormName="firstname"
+              [warning]="warning$.value"
+              [formControlObj]="form.controls.firstname"
+              [formGroupObj]="form"
+            >
+            </app-form-control>
+            <app-form-control
+              label="lastname"
+              name="account-lastname"
+              controlFormName="lastname"
+              [warning]="warning$.value"
+              [formControlObj]="form.controls.lastname"
+              [formGroupObj]="form"
+            >
+            </app-form-control>
+            <app-form-control
+              label="password"
+              name="account-password"
+              controlFormName="password"
+              [warning]="warning$.value"
+              [formControlObj]="form.controls.password"
+              [formGroupObj]="form"
+            >
+            </app-form-control>
+            <app-form-control
+              label="repeat password"
+              name="account-password-repeat"
+              controlFormName="passwordRepeat"
+              [warning]="warning$.value"
+              [formControlObj]="form.controls.passwordRepeat"
+              [formGroupObj]="form"
+              [validationMessagesOptions]="validationMessagesOptions.passwordRepeat"
+            >
+            </app-form-control>
+            <div class="form-actions">
+              <app-button
+                type="submit"
+                [loading]="loading.registration"
+              >
+                Register
+              </app-button>
+              <app-link
+                class="link"
+                urlKey="login"
+                variant="white"
+              >
+                Already have account?
+              </app-link>
+            </div>
+          </form>
+        </div>
+      </section>
+    </div>
+  </section>
+</main>

@@ -1,0 +1,76 @@
+@keyframes level-playing-1 {
+  0% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(0.75);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes level-playing-2 {
+  0% {
+    transform: scaleY(0.8);
+  }
+  50% {
+    transform: scaleY(0.6);
+  }
+  100% {
+    transform: scaleY(0.8);
+  }
+}
+
+@keyframes level-playing-3 {
+  0% {
+    transform: scaleY(0.6);
+  }
+  50% {
+    transform: scaleY(0.4);
+  }
+  100% {
+    transform: scaleY(0.6);
+  }
+}
+
+@keyframes level-playing-4 {
+  0% {
+    transform: scaleY(0.4);
+  }
+  50% {
+    transform: scaleY(0.2);
+  }
+  100% {
+    transform: scaleY(0.4);
+  }
+}
+
+.play-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  width: 100%;
+  height: 100%;
+
+  .level {
+    transform-origin: bottom;
+    width: calc(100% * 0.035);
+    height: calc(100% * 0.3);
+    transition: var(--app-tr-bg);
+  }
+
+  [data-level-order="1"] {
+    animation: level-playing-1 .55s infinite ease-out;
+  }
+  [data-level-order="2"] {
+    animation: level-playing-2 .65s infinite ease-out;
+  }
+  [data-level-order="3"] {
+    animation: level-playing-3 .55s infinite ease-out;
+  }
+  [data-level-order="4"] {
+    animation: level-playing-4 .65s infinite ease-out;
+  }
+}

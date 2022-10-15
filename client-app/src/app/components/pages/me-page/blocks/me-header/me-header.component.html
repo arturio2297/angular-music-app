@@ -1,0 +1,12 @@
+<div class="page-header-content">
+  <div class="navigation">
+    <a
+      *ngFor="let x of urls let i = index"
+      [className]="'navigation-item ' + x.value"
+      [routerLink]="x.value"
+      [routerLinkActive]="'active active-' + x.value"
+    >{{ x.title }}</a>
+    <div class="hover-indicator"></div>
+    <div class="selected-indicator"></div>
+  </div>
+</div>

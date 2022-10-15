@@ -1,0 +1,10 @@
+<nav class="navigation-container">
+  <a
+    class="navigation-item"
+    *ngFor="let x of urls"
+    [routerLink]="x.value"
+    [routerLinkActive]="'active'"
+  >
+    {{ x.title | titlecase }}
+  </a>
+</nav>

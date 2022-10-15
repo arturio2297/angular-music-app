@@ -1,0 +1,21 @@
+@tracks-section-header: 5rem;
+
+.tracks-section {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  .tracks-section-header {
+    height: @tracks-section-header;
+  }
+
+  .tracks-section-wrapper {
+    height: calc(100% - @tracks-section-header);
+    overflow: hidden auto;
+
+    .tracks-section-item {
+
+    }
+  }
+}

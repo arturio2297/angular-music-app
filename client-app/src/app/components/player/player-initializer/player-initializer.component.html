@@ -1,0 +1,9 @@
+<audio
+  #audioRef
+  style="display: none"
+  [src]="audioUrl"
+  (loadedmetadata)="onMetadataLoaded($event)"
+  (ended)="onEnded()"
+  crossorigin="use-credentials"
+>
+</audio>

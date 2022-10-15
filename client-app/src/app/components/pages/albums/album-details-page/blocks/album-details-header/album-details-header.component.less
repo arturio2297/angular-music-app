@@ -1,0 +1,30 @@
+.album-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+
+  .album-title {
+    width: max-content;
+
+    .released-at {
+      color: var(--app-grey);
+      font-size: 0.9rem;
+    }
+  }
+
+  .group-name {
+    color: white;
+  }
+
+  .album-genres {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    color: white;
+    gap: 0.25rem;
+  }
+}
+
+:host ::ng-deep app-link.group-link a {
+  font-weight: bold;
+}

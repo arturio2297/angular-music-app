@@ -1,0 +1,65 @@
+.app-button {
+  position: relative;
+  color: white;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: var(--app-tr-bs), var(--app-tr-bg), var(--app-tr-color);
+  height: 2.5rem;
+  width: 100%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .content {
+
+  }
+
+  .content.hide-button-content {
+    visibility: hidden;
+  }
+
+  .spinner {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+  }
+}
+
+.app-button.main {
+  background: var(--app-blue-dark);
+}
+
+.app-button.dark {
+  background: var(--app-dark-brighest);
+}
+
+.app-button.main:hover {
+  background: var(--app-blue-light);
+}
+
+.app-button.dark:hover {
+  background: var(--app-grey);
+}
+
+.app-button:active {
+  box-shadow: var(--app-bs-action);
+}
+
+.app-button:disabled {
+  cursor: inherit;
+  transition: none;
+}
+
+.app-button.main:disabled {
+  box-shadow: 0 0 2px 2px var(--app-blue-dark);
+  background: none;
+}
+
+.app-button.dark:disabled {
+  border: var(--app-dark-brighest);
+  background: none;
+}

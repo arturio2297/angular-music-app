@@ -1,0 +1,19 @@
+<button
+  [className]="'app-button ' + variant"
+  [disabled]="disable"
+  [type]="loading ? 'button' : type"
+  (click)="onButtonClick()"
+>
+  <div
+    class="content"
+    [ngClass]="{ 'hide-button-content' : loading }"
+  >
+    <ng-content></ng-content>
+  </div>
+  <app-spinner
+    *ngIf="loading"
+    class="spinner"
+    size="s"
+  >
+  </app-spinner>
+</button>

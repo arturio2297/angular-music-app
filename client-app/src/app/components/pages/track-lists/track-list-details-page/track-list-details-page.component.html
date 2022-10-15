@@ -1,0 +1,50 @@
+<main class="page-container">
+  <section
+    *ngIf="trackList"
+    class="page-header-container page-header-container-big"
+  >
+    <app-track-list-details-header></app-track-list-details-header>
+  </section>
+  <section
+    *ngIf="trackList"
+    class="page-content page-content-small"
+    scroll
+    (onScrollDown)="onScrollDown()"
+  >
+    <div
+      class="track-list-wrapper"
+      [ngClass]="{ 'hide': !tracks.length }"
+    >
+      <app-track-list-item
+        class="track-item-wrapper"
+        *ngFor="let x of tracks"
+        [track]="x"
+        [listId]="trackList.id"
+        [listType]="listType"
+      >
+      </app-track-list-item>
+      <div
+        *ngIf="loading.tracks.fetchTracks"
+        class="more-loader"
+      >
+        <app-spinner size="m"></app-spinner>
+      </div>
+    </div>
+    <app-not-found-message
+      *ngIf="!tracks.length && !loading.tracks.fetchTracks"
+      [query]="tracksFilter.search"
+      contentName="tracks"
+    >
+    </app-not-found-message>
+    <app-loader
+      *ngIf="!tracks.length && loading.tracks.fetchTracks"
+      text="Download tracks..."
+    >
+    </app-loader>
+  </section>
+  <app-loader
+    *ngIf="loading.trackLists.fetchTrackList"
+    text="Download track list..."
+  >
+  </app-loader>
+</main>

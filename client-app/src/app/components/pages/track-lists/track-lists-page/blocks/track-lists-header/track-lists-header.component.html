@@ -1,0 +1,29 @@
+<div class="page-header-content">
+  <div></div>
+  <form [formGroup]="form" class="filter-form">
+    <app-search-control
+      class="search-control"
+      [loading]="searching$.value"
+      name="search"
+      (onSearch)="onSearch($event.value)"
+      (onCleared)="onSearchCleared()"
+      [formGroupObj]="form"
+      [formControlObj]="form.controls.search"
+      controlFormName="search"
+      placeholder="Search track lists..."
+      [showAction]="true"
+      [searchQueries]="searchQueries"
+      (onRemoveQuery)="onRemoveQuery($event)"
+    >
+    </app-search-control>
+  </form>
+  <div>
+    <app-actions-dropdown
+      (onActionsClick)="onActionClick($event)"
+      class="track-lists-actions"
+      *ngIf="showActions"
+      [_items]="actions"
+    >
+    </app-actions-dropdown>
+  </div>
+</div>

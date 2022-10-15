@@ -1,0 +1,29 @@
+<main class="page-container">
+  <section class="page-header-container">
+    <div class="page-header-content">
+      <h2>Your account</h2>
+    </div>
+  </section>
+  <div class="page-content">
+    <div class="page-content-inner">
+      <section class="page-section"></section>
+      <section class="page-section forms-section right">
+        <div class="form-selector">
+          <div
+            class="selector-item" *ngFor="let x of formVariants"
+            [ngClass]="{ 'selected' : x === selectedForm$.value }"
+            (click)="selectForm(x)"
+          >{{ x.title }}</div>
+          <span [className]="'selected-indicator ' + selectedForm$.value.className"></span>
+        </div>
+        <div [ngSwitch]="selectedForm$.value" class="account-form-wrapper">
+          <app-personal-data-form
+            *ngSwitchCase="formVariants[0]"
+            (onFormSubmit)="updatePersonalData($event)"
+          >
+          </app-personal-data-form>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>

@@ -1,0 +1,10 @@
+<a
+  [routerLink]="appUrl"
+  [className]="'app-link ' + variant + ' like-' + like"
+  [queryParams]="queryParams"
+  [ngClass]="{
+  'underline': underline
+  }"
+>
+  <ng-content></ng-content>
+</a>

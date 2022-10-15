@@ -1,0 +1,28 @@
+@import "../../../../../styles/main.styles";
+
+.navigation-container {
+  height: var(--app-header-height);
+  display: flex;
+  align-items: center;
+
+  .navigation-item {
+    height: 100%;
+    padding: 0 2rem;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: var(--app-grey);
+    transition: var(--app-tr-color);
+  }
+
+  .navigation-item:hover, .active {
+    color: white;
+  }
+}
+
+@media (max-width: @xl-bd) {
+
+}

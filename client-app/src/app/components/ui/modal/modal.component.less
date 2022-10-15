@@ -1,0 +1,67 @@
+.app-modal-background {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: var(--app-anim-appearance);
+  z-index: 1044;
+
+  .app-modal-container {
+    height: 100%;
+    position: relative;
+    min-width: 400px;
+    width: 25%;
+
+    .app-modal {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 0;
+      width: 100%;
+      background: var(--app-dark-brighest);
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+      box-sizing: border-box;
+      color: white;
+      animation: modal-appearance .2s ease-out;
+
+      .modal-close {
+        position: absolute;
+        right: 0;
+        top: 0;
+        cursor: pointer;
+      }
+    }
+
+    .app-modal.closed {
+      animation: modal-disappearance .2s ease-out;
+    }
+  }
+}
+
+.app-modal-background.closed {
+  animation: var(--app-anim-disappearance);
+}
+
+@keyframes modal-appearance {
+  from {
+    top: 60%;
+  }
+  to {
+    top: 50%;
+  }
+}
+
+@keyframes modal-disappearance {
+  from {
+    top: 50%;
+  }
+  to {
+    top: 60%;
+  }
+}

@@ -1,0 +1,64 @@
+<div
+  [className]="'control ' + orientation"
+  hint
+  [delay]="0"
+  [showHint]="isGrab$.value"
+  mouseWheel
+  (onWheelUp)="onWheelUp()"
+  (onWheelDown)="onWheelDown()"
+>
+  <div
+    #durationRef
+    class="indicator bg"
+  >
+    <app-hint
+      *ngIf="orientation === 'horizontal'"
+      [style]="{ left: hintXPosition$.value, position: 'absolute' }"
+    >
+      <div [ngSwitch]="hintType">
+        <span *ngSwitchCase="'percent'">{{ hint$.value + '%' }}</span>
+        <span *ngSwitchCase="'time'">{{ hint$.value }}</span>
+        <span *ngSwitchCase="'absolute'">{{ hint$.value }}</span>
+      </div>
+    </app-hint>
+    <app-hint
+      *ngIf="orientation === 'vertical'"
+      position="top"
+    >
+      <div [ngSwitch]="hintType">
+        <span *ngSwitchCase="'percent'">{{ hint$.value + '%' }}</span>
+        <span *ngSwitchCase="'time'">{{ hint$.value }}</span>
+        <span *ngSwitchCase="'absolute'">{{ hint$.value }}</span>
+      </div>
+    </app-hint>
+  </div>
+  <div
+    *ngIf="orientation === 'horizontal'"
+    class="indicator"
+    [style]="{ width: sliderXPosition$.value || percentPosition }"
+  >
+  </div>
+  <div
+    *ngIf="orientation === 'vertical'"
+    class="indicator"
+    [style]="{ height: sliderYPosition$.value || percentPosition }"
+  >
+  </div>
+  <div
+    #sliderRef
+    *ngIf="orientation === 'horizontal'"
+    class="slider"
+    [ngClass]="{ 'active': isGrab$.value }"
+    [style]="{ left: sliderXPosition$.value || percentPosition }"
+  >
+  </div>
+  <div
+    #sliderRef
+    *ngIf="orientation === 'vertical'"
+    class="slider"
+    [ngClass]="{ 'active': isGrab$.value }"
+    [style]="{ bottom: sliderYPosition$.value || percentPosition }"
+  >
+  </div>
+  <ng-content></ng-content>
+</div>

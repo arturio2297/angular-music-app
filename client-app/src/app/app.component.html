@@ -1,0 +1,16 @@
+<div id="app-container" *ngIf="!loading">
+  <app-header></app-header>
+  <div
+    class="page-wrapper"
+    [ngClass]="{ 'player-open': showPlayer }"
+  >
+    <router-outlet></router-outlet>
+  </div>
+  <app-audio-player *ngIf="showPlayer"></app-audio-player>
+  <app-dialogs></app-dialogs>
+  <app-toasts [showPlayer]="showPlayer"></app-toasts>
+</div>
+<div *ngIf="loading" class="page-loader">
+  <app-spinner size="xxl"></app-spinner>
+</div>
+<app-player-initializer></app-player-initializer>

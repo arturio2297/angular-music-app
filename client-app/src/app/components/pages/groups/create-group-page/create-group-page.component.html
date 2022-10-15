@@ -1,0 +1,12 @@
+<main class="page-container">
+  <section class="page-header-container">
+    <app-create-group-header></app-create-group-header>
+  </section>
+  <section class="page-content">
+    <app-create-group-form
+      class="page-content-inner"
+      (onFormSubmit)="createGroup($event)"
+    >
+    </app-create-group-form>
+  </section>
+</main>

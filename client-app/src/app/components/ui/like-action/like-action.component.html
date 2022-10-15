@@ -1,0 +1,26 @@
+<div
+  class="app-like-action"
+  [ngClass]="{ 'liked': likeData.liked }"
+  (click)="onLikeClick()"
+  [style]="size || { width: '1.25rem', height: '1.25rem' }"
+  hint
+>
+  <app-action-button
+    class="like-action-button"
+    type="like"
+    [_size]="innerSize || { width: '1.25rem', height: '1.25rem' }"
+  >
+  </app-action-button>
+  <div
+    *ngIf="params.showLikesCount"
+    class="likes-count"
+  >
+    {{ likeData.likesCount | count }}
+  </div>
+  <app-hint
+    *ngIf="!params.disableHint"
+    [position]="params.hintPosition"
+  >
+    Like
+  </app-hint>
+</div>

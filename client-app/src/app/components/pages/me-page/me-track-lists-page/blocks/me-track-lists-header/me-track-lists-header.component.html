@@ -1,0 +1,21 @@
+<div class="page-header-page-inner-content">
+  <form
+    [formGroup]="form"
+    class="filter-form"
+  >
+    <app-search-control
+      [loading]="searching$.value"
+      [formGroupObj]="form"
+      [formControlObj]="form.controls.search"
+      (onSearch)="onSearch($event)"
+      (onCleared)="onSearchCleared()"
+      controlFormName="search"
+      name="search"
+      placeholder="Search track lists..."
+      [showAction]="true"
+      [searchQueries]="searchQueries"
+      (onRemoveQuery)="onRemoveQuery($event)"
+    >
+    </app-search-control>
+  </form>
+</div>

@@ -1,0 +1,54 @@
+<div
+  *ngIf="items.length || values.length"
+  class="app-dropdown-list"
+>
+  <app-action-button
+    *ngIf="showClose"
+    class="dropdown-list-close-button"
+    type="close"
+    [_size]="{ width: '1.75rem', height: '1.75rem' }"
+    (onClick)="onClose.emit()"
+  >
+  </app-action-button>
+  <ng-content></ng-content>
+  <div
+    class="dropdown-list-item"
+    *ngFor="let x of items"
+  >
+    <div
+      role="button"
+      class="item-content"
+      (click)="onElementClick(x)"
+    >
+      {{x.name}}
+    </div>
+    <div
+      role="button"
+      *ngIf="itemAction"
+      class="item-action"
+      (click)="onElementActionClick(x)"
+    >
+      {{itemAction}}
+    </div>
+  </div>
+  <div
+    class="dropdown-list-item"
+    *ngFor="let x of values"
+  >
+    <div
+      role="button"
+      class="item-content"
+      (click)="onElementClick(x)"
+    >
+      {{ x }}
+    </div>
+    <div
+      role="button"
+      *ngIf="itemAction"
+      class="item-action"
+      (click)="onElementActionClick(x)"
+    >
+      {{ itemAction }}
+    </div>
+  </div>
+</div>

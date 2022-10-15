@@ -1,0 +1,16 @@
+<app-modal (_onClose)="onCancel()">
+  <div data-modal="header">
+    Remove Music Group {{ groupData.name }}
+  </div>
+  <div data-modal="body">
+    Do you really want to delete this music group?
+  </div>
+  <div data-modal="footer">
+    <app-button
+      (onClick)="onDelete()"
+      [loading]="loading.deleteGroup"
+    >
+      Confirm
+    </app-button>
+  </div>
+</app-modal>

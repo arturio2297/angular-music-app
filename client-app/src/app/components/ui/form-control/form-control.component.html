@@ -1,0 +1,90 @@
+<div
+  [formGroup]="formGroupObj"
+  class="app-form-control"
+>
+  <label
+    *ngIf="label"
+    [htmlFor]="name"
+  >
+    <span>{{label | titlecase}}</span>
+    <span
+      *ngIf="isRequired"
+      class="required-indicator"
+    >
+      *
+    </span>
+  </label>
+  <div
+    [ngSwitch]="controlType"
+    class="control-container"
+    [ngClass]="{ 'with-action': action }"
+  >
+    <input
+      (input)="onControlChange($event)"
+      class="control"
+      *ngSwitchCase="'input'"
+      [autofocus]="autofocus"
+      [type]="type"
+      [name]="name"
+      [formControlName]="controlFormName"
+      [readOnly]="readonly"
+      [placeholder]="placeholder"
+      (focus)="onControlFocus()"
+      (blur)="onControlBlur()"
+      (keydown)="onControlKeyDown($event)"
+      (click)="onControlClick()"
+    >
+    <textarea
+      class="control"
+      [rows]="4"
+      *ngSwitchCase="'textarea'"
+      [autofocus]="autofocus"
+      [name]="name"
+      [formControlName]="controlFormName"
+      [readOnly]="readonly"
+      [placeholder]="placeholder"
+      (focus)="onControlFocus()"
+      (blur)="onControlBlur()"
+      (keydown)="onControlKeyDown($event)"
+      (click)="onControlClick()"
+    >
+    </textarea>
+    <div
+      *ngIf="action"
+      class="action-container"
+      (click)="onButtonClick.emit()"
+    >
+      <app-action-button
+        [type]="action"
+        [_size]="{ width: '1.5rem', height: '1.5rem' }"
+      >
+      </app-action-button>
+    </div>
+    <app-spinner
+      *ngIf="loading"
+      class="spinner"
+      size="s"
+    >
+    </app-spinner>
+    <app-action-button
+      *ngIf="showClear"
+      (onClick)="onClear()"
+      class="clear-button"
+      type="close"
+      hint
+    >
+      <app-hint position="left">
+        Clear
+      </app-hint>
+    </app-action-button>
+    <ng-content></ng-content>
+  </div>
+  <div
+    *ngIf="errors.length"
+    class="validation-errors-container"
+  >
+    <app-alert type="danger" *ngFor="let x of errors">
+      {{x}}
+    </app-alert>
+  </div>
+</div>

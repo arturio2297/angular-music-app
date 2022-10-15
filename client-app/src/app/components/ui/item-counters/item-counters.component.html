@@ -1,0 +1,38 @@
+<div class="app-item-counters">
+  <div
+    *ngIf="listeningCount !== null"
+    class="counter-item listening-count"
+  >
+    <i-bs name="headphones"></i-bs>
+    <span class="counter-value">
+      {{ listeningCount | count }}
+    </span>
+  </div>
+  <div
+    *ngIf="likesCount !== null"
+    class="counter-item likes-count"
+  >
+    <i-bs name="heart-fill"></i-bs>
+    <span class="counter-value">
+      {{ likesCount | count }}
+    </span>
+  </div>
+  <div
+    *ngIf="tracksCount !== null"
+    class="counter-item likes-count"
+  >
+    <i-bs name="music-note-list"></i-bs>
+    <span class="counter-value">
+      {{ tracksCount }}
+    </span>
+  </div>
+  <div
+    *ngIf="albumCount !== null"
+    class="counter-item albums-count"
+  >
+    <i-bs name="vinyl-fill"></i-bs>
+    <span class="counter-value">
+      {{ albumCount }}
+    </span>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+<div class="page-header-content">
+  <div class="page-header-content-wrapper">
+    <app-action-button
+      type="back"
+      (onClick)="navigationService.toGroups()"
+      hint
+    >
+      <app-hint>
+        To groups page
+      </app-hint>
+    </app-action-button>
+    <app-group-list-item
+      [group]="group"
+      [params]="{
+      disableActions: true,
+      hideTitle: true
+      }"
+    >
+    </app-group-list-item>
+    <div class="page-header-content-inner group-header-content-inner">
+      <div class="group-info">
+        <h2>{{ group.name }}</h2>
+        <div class="group-genres">
+          <span>Genres:</span>
+          <span *ngFor="let x of group.genres | genres">
+            {{ x }}
+          </span>
+        </div>
+      </div>
+      <div class="navigation">
+        <a
+          *ngFor="let x of urls let i = index"
+          [className]="'navigation-item ' + x.value"
+          [routerLink]="x.value"
+          [routerLinkActive]="'active active-' + x.value"
+        >{{ x.title | titlecase }}</a>
+        <div class="hover-indicator"></div>
+        <div class="selected-indicator"></div>
+      </div>
+    </div>
+  </div>
+  <app-actions-dropdown
+    (onActionsClick)="onActionsClick($event)"
+    class="item-actions"
+    *ngIf="showActions"
+    [_items]="actions"
+  >
+  </app-actions-dropdown>
+</div>

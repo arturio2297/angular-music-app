@@ -1,0 +1,27 @@
+<div class="app-action-button" role="button" (click)="onClick.emit()" [ngSwitch]="type">
+  <i-bs *ngSwitchCase="'add'" name="plus-circle" [width]="size.width" [height]="size.height"></i-bs>
+  <i-bs *ngSwitchCase="'remove'" name="trash-fill" [width]="size.width" [height]="size.height"></i-bs>
+  <i-bs *ngSwitchCase="'back'" name="arrow-left-circle" [width]="size.width" [height]="size.height"></i-bs>
+  <i-bs *ngSwitchCase="'next'" name="arrow-right-circle" [width]="size.width" [height]="size.height"></i-bs>
+  <i-bs *ngSwitchCase="'previous'" name="arrow-left-circle" [width]="size.width" [height]="size.height"></i-bs>
+  <i-bs *ngSwitchCase="'close'" name="x" [width]="size.width" [height]="size.height"></i-bs>
+  <i-bs *ngSwitchCase="'dropdown'" name="caret-down-fill" [width]="size.width" [height]="size.height"></i-bs>
+  <i-bs *ngSwitchCase="'edit'" name="pencil-fill" [width]="size.width" [height]="size.height"></i-bs>
+  <i-bs *ngSwitchCase="'update'" name="pencil-fill" [width]="size.width" [height]="size.height"></i-bs>
+  <i-bs *ngSwitchCase="'music-note'" name="music-note" [width]="size.width" [height]="size.height"></i-bs>
+  <i-bs *ngSwitchCase="'music-note-list'" name="music-note-list" [width]="size.width" [height]="size.height"></i-bs>
+  <i-bs *ngSwitchCase="'play'" name="play-fill" [width]="size.width" [height]="size.height"></i-bs>
+  <i-bs *ngSwitchCase="'stop'" name="stop-fill" [width]="size.width" [height]="size.height"></i-bs>
+  <i-bs *ngSwitchCase="'repeat'" name="repeat" [width]="size.width" [height]="size.height"></i-bs>
+  <i-bs *ngSwitchCase="'repeat-1'" name="repeat-1" [width]="size.width" [height]="size.height"></i-bs>
+  <i-bs *ngSwitchCase="'download'" name="download" [width]="size.width" [height]="size.height"></i-bs>
+  <i-bs *ngSwitchCase="'like'" name="heart-fill" [width]="size.width" [height]="size.height"></i-bs>
+  <i-bs *ngSwitchCase="'check'" name="check" [width]="size.width" [height]="size.height"></i-bs>
+  <i-bs *ngSwitchCase="'list-check'" name="list-check" [width]="size.width" [height]="size.height"></i-bs>
+  <i-bs *ngSwitchCase="'plus'" name="plus" [width]="size.width" [height]="size.height"></i-bs>
+  <i-bs *ngSwitchCase="'refresh'" name="arrow-clockwise" [width]="size.width" [height]="size.height"></i-bs>
+  <i-bs *ngSwitchCase="'search'" name="search" [width]="size.width" [height]="size.height"></i-bs>
+  <i-bs *ngSwitchCase="'sliders'" name="sliders2-vertical" [width]="size.width" [height]="size.height"></i-bs>
+  <i-bs *ngSwitchCase="'waves'" name="soundwave" [width]="size.width" [height]="size.height"></i-bs>
+</div>
+<ng-content></ng-content>

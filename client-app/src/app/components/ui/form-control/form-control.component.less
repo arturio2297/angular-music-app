@@ -1,0 +1,120 @@
+.app-form-control {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  label {
+    color: white;
+
+    .required-indicator {
+      color: red;
+    }
+  }
+
+  .control-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: var(--app-dark-brighest);
+    border: var(--app-grey) solid 1px;
+    border-radius: 0.5rem;
+
+    .clear-button, .spinner {
+      position: absolute;
+      right: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%) translateX(-25%);
+    }
+
+    .clear-button {
+      right: 0.25rem;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      cursor: pointer;
+    }
+
+    input {
+      height: 2.5rem;
+    }
+
+    textarea {
+      resize: none;
+    }
+
+    .control {
+      width: 100%;
+      border-radius: 0.5rem;
+      outline: none;
+      background: var(--app-dark-brighest);
+      color: white;
+      padding: 0.25rem 3rem 0.25rem 0.75rem;
+      box-sizing: border-box;
+      border: none;
+    }
+
+    .control:read-only {
+      background: var(--app-dark);
+      cursor: no-drop;
+    }
+
+    .control[type="color"] {
+      padding: 0.25rem;
+    }
+
+    .control[type="color"]:read-only {
+      cursor: inherit;
+    }
+
+    .action-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--app-dark-brighest);
+      height: 2.5rem;
+      width: 3.5rem;
+      box-sizing: border-box;
+      border-top-right-radius: 0.5rem;
+      border-bottom-right-radius: 0.5rem;
+      margin-left: 3px;
+      cursor: pointer;
+      border-left: var(--app-grey) solid 1px;
+    }
+
+    .action-container:hover {
+      ::ng-deep app-action-button div {
+        color: var(--app-almost-white);
+      }
+    }
+  }
+
+  .control-container.with-action {
+    input {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    .clear-button {
+      right: 3rem;
+    }
+
+    .spinner {
+      right: 3.5rem;
+    }
+  }
+}
+
+.validation-errors-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  .validation-error {
+    border-radius: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    background: var(--app-bg-danger);
+    color: var(--app-text-danger);
+  }
+}

@@ -1,0 +1,40 @@
+.show-button() {
+  bottom: 50%;
+  transform: translateY(50%);
+}
+
+.hide-button() {
+  bottom: -100%;
+}
+
+.app-save-action {
+  cursor: pointer;
+
+  .actions-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .save-action-button {
+    position: absolute;
+    transition: var(--app-tr-bottom);
+  }
+
+  .save-action-button.save {
+    .show-button();
+  }
+
+  .save-action-button.remove {
+    .hide-button();
+  }
+
+  .save-action-button.save.saved {
+    .hide-button();
+  }
+
+  .save-action-button.remove.saved {
+    .show-button();
+  }
+}

@@ -1,0 +1,162 @@
+<section class="page-section">
+  <h3>Fill Main Information</h3>
+  <div class="form-container">
+    <div class="image-section">
+      <div class="image-actions">
+        <app-button
+          variant="dark"
+          (onClick)="startCropImage()"
+        >
+          Add Image
+        </app-button>
+      </div>
+      <div class="image-container">
+        <img
+          class="image"
+          [src]="imageUrl || './assets/images/album-anonymous.png'"
+          alt="track list"
+        >
+      </div>
+    </div>
+    <app-alert
+      type="danger"
+      *ngIf="createForm.errors && createForm.errors['imageRequired'] && warning$.value"
+    >
+      Track list image is required
+    </app-alert>
+    <form [formGroup]="createForm" (ngSubmit)="onSubmit()" class="form">
+      <app-form-control
+        label="Track List Title"
+        name="name"
+        controlFormName="name"
+        [formGroupObj]="createForm"
+        [formControlObj]="createControls.name"
+        [warning]="warning$.value"
+        [loading]="loading.trackLists.checkName"
+      >
+      </app-form-control>
+      <div
+        *ngIf="addedTracks.length"
+        class="names-list-container"
+      >
+        <h3>Added Tracks: {{ addedTracks.length }}</h3>
+        <div class="names-list">
+          <div
+            class="name-item"
+            *ngFor="let x of addedTracks"
+          >
+            <div hint>
+              <span>{{ x.name }}</span>
+              <app-hint position="top">
+                {{ x.groupName }} / {{ x.albumName }}
+              </app-hint>
+            </div>
+            <app-action-button
+              type="close"
+              [_size]="{ width: '1rem', height: '1rem' }"
+              (onClick)="onRemoveTrackItemClick(x)"
+              hint
+            >
+              <app-hint position="top">
+                Delete track from list
+              </app-hint>
+            </app-action-button>
+          </div>
+        </div>
+      </div>
+      <div class="form-actions">
+        <app-button
+          type="submit"
+          [loading]="loading.trackLists.addTrackList"
+        >
+          Add
+        </app-button>
+      </div>
+    </form>
+  </div>
+</section>
+<section class="page-section right tracks-section">
+  <section class="tracks-section-header">
+    <h3>Add Tracks To Your Track List</h3>
+    <form [formGroup]="searchForm">
+      <app-search-control
+        name="searchTracks"
+        controlFormName="searchTracks"
+        [loading]="loading.tracks.fetchTracks"
+        (onSearch)="onTracksSearch($event.value)"
+        [params]="{ length: 2, delay: 500 }"
+        (onCleared)="clearSearchResult()"
+        [formGroupObj]="searchForm"
+        [formControlObj]="searchControls.searchTracks"
+        [showAction]="true"
+        [searchQueries]="searchQueries"
+        (onRemoveQuery)="onRemoveQuery($event)"
+      >
+      </app-search-control>
+    </form>
+  </section>
+  <section
+    scroll
+    (onScrollDown)="onScrollDown()"
+    class="tracks-section-wrapper"
+  >
+    <div
+      class="track-list-wrapper"
+      [ngClass]="{ 'hide' : !tracks.length }"
+    >
+      <app-track-list-item
+        class="track-item-wrapper tracks-section-item"
+        *ngFor="let x of tracks"
+        [track]="x"
+        [params]="{
+        disableActions: true,
+        disableControls: true,
+        likeDisable: true,
+        saveDisable: true
+         }"
+      >
+        <app-action-button
+          *ngIf="!isTrackAdded(x)"
+          type="add"
+          (onClick)="onAddTrackItemClick(x)"
+          [_size]="{ width: '1.5rem', height: '1.5rem' }"
+          hint
+        >
+          <app-hint position="left">
+            Add track to list
+          </app-hint>
+        </app-action-button>
+        <app-action-button
+          *ngIf="isTrackAdded(x)"
+          type="remove"
+          (onClick)="onRemoveTrackItemClick(x)"
+          [_size]="{ width: '1.5rem', height: '1.5rem' }"
+          hint
+        >
+          <app-hint position="left">
+            Delete track from list
+          </app-hint>
+        </app-action-button>
+      </app-track-list-item>
+      <div
+        *ngIf="loading.tracks.fetchTracks"
+        class="more-loader"
+      >
+        <app-spinner size="m"></app-spinner>
+      </div>
+    </div>
+    <app-not-found-message
+      class="tracks-section-wrapper"
+      *ngIf="!tracks.length && !loading.tracks.fetchTracks && filter.search"
+      [query]="filter.search"
+      contentName="tracks"
+    >
+    </app-not-found-message>
+    <app-loader
+      *ngIf="!tracks.length && loading.tracks.fetchTracks"
+      class="tracks-section-wrapper"
+      text="Download tracks..."
+    >
+    </app-loader>
+  </section>
+</section>

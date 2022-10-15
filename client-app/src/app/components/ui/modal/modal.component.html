@@ -1,0 +1,22 @@
+<div class="app-modal-background" [ngClass]="{ 'closed' : closed$.value }">
+  <div class="app-modal-container">
+    <div
+      class="app-modal"
+      [ngClass]="{ 'closed' : closed$.value }"
+      (mouseenter)="modalHover$.next(true)"
+      (mouseleave)="modalHover$.next(false)"
+    >
+      <app-action-button
+        class="modal-close"
+        type="close"
+        (onClick)="close()"
+        hint
+      >
+        <app-hint>
+          Close dialog
+        </app-hint>
+      </app-action-button>
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

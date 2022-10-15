@@ -1,0 +1,44 @@
+@import "../styles/main.styles";
+
+#app-container {
+  width: 100%;
+  height: 100%;
+}
+
+.page-wrapper {
+  position: fixed;
+  width: 75%;
+  height: calc(100% - var(--app-header-height));
+  transition: var(--app-tr-height), var(--app-tr-margin-bottom);
+  padding: 0.5rem 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  box-sizing: border-box;
+  border-radius: 0.5rem;
+}
+
+.page-wrapper.player-open {
+  height: calc(100% - var(--app-header-height) - var(--app-audio-player-height));
+  margin-bottom: var(--app-audio-player-height);
+}
+
+@media (max-width: @xl-bd) {
+  .page-wrapper {
+    width: 80%;
+  }
+}
+
+@media (max-width: @lg-bd) {
+  .page-wrapper {
+    width: 90%;
+  }
+}
+
+.page-loader {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
